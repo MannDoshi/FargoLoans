@@ -10,6 +10,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -20,6 +21,7 @@ import com.wellsfargo.training.fargoloans.model.Customer;
 import com.wellsfargo.training.fargoloans.service.CustomerService;
 import com.wellsfargo.training.fargoloans.exception.ResourceNotFoundException;
 
+@CrossOrigin(origins="http://localhost:3000")
 @RestController
 @RequestMapping(value="/api")
 public class CustomerController {
@@ -56,6 +58,7 @@ public class CustomerController {
 		Boolean a=false;
 		String email=customer.getEmail();
 		String password=customer.getPassword();
+		System.out.println(email);
 		
 		Customer c = cservice.loginCustomer(email).orElseThrow(() -> new ResourceNotFoundException("Customer not found for id :: "));
 		
