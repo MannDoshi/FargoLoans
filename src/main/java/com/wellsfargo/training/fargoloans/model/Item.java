@@ -1,10 +1,15 @@
 package com.wellsfargo.training.fargoloans.model;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
 @Entity
@@ -30,6 +35,10 @@ public class Item {
 	
 	@Column(name="item_valuation")
 	private long itemValuation;
+
+	@OneToMany(cascade=CascadeType.ALL, mappedBy = "item")
+	@Column(name="issue_ids")
+	private List<EmployeeIssue> issueIdList= new ArrayList<>();
 
 	public long getItemId() {
 		return itemId;
@@ -78,6 +87,14 @@ public class Item {
 	public void setItemValuation(long itemValuation) {
 		this.itemValuation = itemValuation;
 	}
-	
 
+	public List<EmployeeIssue> getIssueIdList() {
+		return issueIdList;
+	}
+
+	public void setIssueIdList(List<EmployeeIssue> issueIdList) {
+		this.issueIdList = issueIdList;
+	}
+	
+	
 }
