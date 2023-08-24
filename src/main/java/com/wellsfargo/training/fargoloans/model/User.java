@@ -1,6 +1,8 @@
 package com.wellsfargo.training.fargoloans.model;
 
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import jakarta.persistence.*;
@@ -38,6 +40,11 @@ public class User {
         inverseJoinColumns = @JoinColumn(name = "role_id"))
   private Set<Role> roles = new HashSet<>();
 
+  
+  @OneToOne(mappedBy = "user")
+  private Employee employee;
+  
+  
   public User() {
   }
 

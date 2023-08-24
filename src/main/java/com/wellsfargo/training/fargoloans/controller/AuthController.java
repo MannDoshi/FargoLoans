@@ -19,12 +19,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.wellsfargo.training.fargoloans.model.ERole;
+import com.wellsfargo.training.fargoloans.model.Employee;
 import com.wellsfargo.training.fargoloans.model.Role;
 import com.wellsfargo.training.fargoloans.model.User;
 import com.wellsfargo.training.fargoloans.payload.request.LoginRequest;
 import com.wellsfargo.training.fargoloans.payload.request.SignupRequest;
 import com.wellsfargo.training.fargoloans.payload.response.JwtResponse;
 import com.wellsfargo.training.fargoloans.payload.response.MessageResponse;
+import com.wellsfargo.training.fargoloans.repository.EmployeeRepository;
 import com.wellsfargo.training.fargoloans.repository.RoleRepository;
 import com.wellsfargo.training.fargoloans.repository.UserRepository;
 import com.wellsfargo.training.fargoloans.security.jwt.JwtUtils;
@@ -44,6 +46,9 @@ public class AuthController {
 
   @Autowired
   RoleRepository roleRepository;
+  
+  @Autowired
+  EmployeeRepository employeeRepository;
 
   @Autowired
   PasswordEncoder encoder;
@@ -74,6 +79,7 @@ public class AuthController {
 
   @PostMapping("/signup")
   public ResponseEntity<?> registerUser(@Valid @RequestBody SignupRequest signUpRequest) {
+	  
     if (userRepository.existsByUsername(signUpRequest.getUsername())) {
       return ResponseEntity
           .badRequest()
@@ -120,10 +126,13 @@ public class AuthController {
         }
       });
     }
-
     user.setRoles(roles);
     userRepository.save(user);
-
+    
+    Employee employee=signUpRequest.getEmployee();
+    employee.setUser(user);
+    employeeRepository.save(employee);
+    
     return ResponseEntity.ok(new MessageResponse("User registered successfully!"));
   }
 }

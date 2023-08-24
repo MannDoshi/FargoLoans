@@ -12,7 +12,9 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
 import jakarta.persistence.OneToMany;
+import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 
 @Entity
@@ -37,6 +39,14 @@ public class Employee {
 	@Column(name="date_of_birth")
 	private Date dob;
 	
+	public User getUser() {
+		return user;
+	}
+
+	public void setUser(User user) {
+		this.user = user;
+	}
+
 	@JsonFormat (pattern="yyyy-MM-dd")
 	@Column(name="date_of_joining")
 	private Date doj;
@@ -48,7 +58,11 @@ public class Employee {
 	@OneToMany(mappedBy = "employee", cascade=CascadeType.ALL)
 	@Column(name="card_ids")
 	private List<EmployeeCard> empCardsList= new ArrayList<>();
-
+	
+	@OneToOne
+	@JoinColumn(name="user_id")
+	private User user;
+	
 	public long getEmpId() {
 		return empId;
 	}
