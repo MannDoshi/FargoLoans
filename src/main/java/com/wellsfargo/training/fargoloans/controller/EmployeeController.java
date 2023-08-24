@@ -49,28 +49,14 @@ public class EmployeeController {
 	  public ResponseEntity<List<EmployeeDetails>> allEmployee() {
 		  return new ResponseEntity<List<EmployeeDetails>>(employeeRepository.findAllBy(), HttpStatus.OK);
 	 }
-//	@GetMapping("/employee/{id}")
-//	  public ResponseEntity<EmployeeDetails> getEmployee(@PathVariable Long id) {
-////		  return new ResponseEntity<EmployeeDetails>(employeeRepository.findEmployeeDetailsByEmpId(id), HttpStatus.OK);
-//		
-//		 return new ResponseEntity<EmployeeDetails>(employeeRepository.findById(id));
-//	}
-//	@GetMapping("/employee/{id}")
-//	  public ResponseEntity<Employee> getEmployee(@PathVariable Long id) {
-////		  return new ResponseEntity<EmployeeDetails>(employeeRepository.findEmployeeDetailsByEmpId(id), HttpStatus.OK);
-//		 return new ResponseEntity<Employee>(employeeRepository.findById(id) ,HttpStatus.OK);
-//	}
+
 	@GetMapping("/{id}")
 	 public Optional<Employee> getEmployee(@PathVariable Long id) {
-		Optional<Employee> res=employeeRepository.findById(id);
+//		
+		Optional<Employee> res=eservice.getEmployee(id);
 		 return res;
 	}
-//	@PatchMapping("/{id}")
-//	 public Optional<Employee> updateEmployee(@PathVariable Long id) {
-//		Optional<Employee> res=employeeRepository.findById(id);
-//		 return res;
-//	}
-	
+
 	@PutMapping("/{id}")
 	public ResponseEntity<Employee> updateProduct(@PathVariable(value="id") Long pId, @Validated @RequestBody Employee e) throws ResourceNotFoundException{
 		Employee employee=eservice.getSingleProduct(pId).orElseThrow(() -> new ResourceNotFoundException("Employee not found for this Id :"+pId));
@@ -90,7 +76,6 @@ public class EmployeeController {
 		Map<String, Boolean> response = new HashMap<>();
 		response.put("Deleted", Boolean.TRUE);
 		return response;
-	
 	}
 
 }
