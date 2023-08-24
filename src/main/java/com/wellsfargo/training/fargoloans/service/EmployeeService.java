@@ -30,5 +30,10 @@ public class EmployeeService {
 	{
 		Erepo.deleteById(id);
 	}
+
+	public Optional<Employee> getEmployee(Long id) {
+		
+		return Erepo.findById(id);
+	}
 	
 }
