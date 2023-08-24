@@ -24,6 +24,33 @@ public class Employee {
 	@Column(name="employee_name")
 	private String empName;
 	
+	@Column(name="password")
+	private String password;
+	
+	public Employee() {}
+	
+	public Employee(long empId, String empName, String password, String designation, String department, Boolean isAdmin,
+			Date dob, Date doj, List<EmployeeIssue> issueIdsList, List<EmployeeCard> empCardsList) {
+		this.empId = empId;
+		this.empName = empName;
+		this.password = password;
+		this.designation = designation;
+		this.department = department;
+		this.isAdmin = isAdmin;
+		this.dob = dob;
+		this.doj = doj;
+		this.issueIdsList = issueIdsList;
+		this.empCardsList = empCardsList;
+	}
+
+	public String getPassword() {
+		return password;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
+	}
+
 	@Column(name="designation")
 	private String designation;
 	
