@@ -9,8 +9,6 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.OneToMany;
@@ -22,19 +20,56 @@ import jakarta.persistence.Table;
 public class Employee {
 
 	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Column(name="employee_id")
 	private long empId;
 	
 	@Column(name="employee_name")
 	private String empName;
 	
+	@Column(name="password")
+	private String password;
+	
+	public Employee() {}
+	
+	public Employee(long empId, String empName, String password, String designation, String department, Boolean isAdmin,
+			Date dob, Date doj, List<EmployeeIssue> issueIdsList, List<EmployeeCard> empCardsList) {
+		this.empId = empId;
+		this.empName = empName;
+		this.password = password;
+		this.designation = designation;
+		this.department = department;
+		this.isAdmin = isAdmin;
+		this.dob = dob;
+		this.doj = doj;
+		this.issueIdsList = issueIdsList;
+		this.empCardsList = empCardsList;
+	}
+
+	public String getPassword() {
+		return password;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
+	}
+
 	@Column(name="designation")
 	private String designation;
 	
 	@Column(name="department")
 	private String department;
 	
+	@Column(name="is_admin")
+	private Boolean isAdmin;
+	
+	public Boolean getIsAdmin() {
+		return isAdmin;
+	}
+
+	public void setIsAdmin(Boolean isAdmin) {
+		this.isAdmin = isAdmin;
+	}
+
 	@JsonFormat (pattern="yyyy-MM-dd")
 	@Column(name="date_of_birth")
 	private Date dob;
