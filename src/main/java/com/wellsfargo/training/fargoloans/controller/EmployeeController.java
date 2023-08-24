@@ -71,7 +71,7 @@ public class EmployeeController {
 //		 return res;
 //	}
 	
-	@PutMapping("/products/{id}")
+	@PutMapping("/{id}")
 	public ResponseEntity<Employee> updateProduct(@PathVariable(value="id") Long pId, @Validated @RequestBody Employee e) throws ResourceNotFoundException{
 		Employee employee=eservice.getSingleProduct(pId).orElseThrow(() -> new ResourceNotFoundException("Employee not found for this Id :"+pId));
 		employee.setDepartment(e.getDepartment());
@@ -83,7 +83,7 @@ public class EmployeeController {
 		return ResponseEntity.ok().body(updateProduct);
 	}
 	
-	@DeleteMapping("/products/{id}")
+	@DeleteMapping("/{id}")
 	public Map<String, Boolean> deleteProduct(@PathVariable(value="id") Long pId) throws ResourceNotFoundException{
 		Employee e=eservice.getSingleProduct(pId).orElseThrow(() -> new ResourceNotFoundException("Employee not found for this Id :"+pId));
 		eservice.deleteProduct(pId);

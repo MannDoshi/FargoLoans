@@ -1,5 +1,7 @@
 package com.wellsfargo.training.fargoloans.service;
 
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -18,4 +20,13 @@ public class LoanService {
 	 public Loan saveLoans(Loan l) {
 		 return Lrepo.save(l);
 	 }
+	 
+	 public Optional<Loan> getSingleLoan(long id){
+			return Lrepo.findById(id);
+		}
+		
+		public void deleteLoan(long id)
+		{
+			Lrepo.deleteById(id);
+		}
 }
