@@ -9,8 +9,6 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
@@ -20,7 +18,6 @@ import jakarta.persistence.Table;
 public class Employee {
 
 	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Column(name="employee_id")
 	private long empId;
 	
@@ -33,6 +30,17 @@ public class Employee {
 	@Column(name="department")
 	private String department;
 	
+	@Column(name="is_admin")
+	private Boolean isAdmin;
+	
+	public Boolean getIsAdmin() {
+		return isAdmin;
+	}
+
+	public void setIsAdmin(Boolean isAdmin) {
+		this.isAdmin = isAdmin;
+	}
+
 	@JsonFormat (pattern="yyyy-MM-dd")
 	@Column(name="date_of_birth")
 	private Date dob;
