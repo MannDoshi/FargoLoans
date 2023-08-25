@@ -38,7 +38,7 @@ public class ItemController {
 	
 	@PostMapping("/")
 	private Item saveItem(@Validated @RequestBody Item i) {
-		Item i2 = Iservice.saveItems(i);
+		Item i2 = Iservice.saveItem(i);
 		return i2;
 	}
 	
@@ -65,11 +65,9 @@ public class ItemController {
 //		loan.setLoanType(l.getLoanType());
 //           loan.setDurationInYears(l.getDurationInYears());
            
-          final Item updatedLoan = Iservice.saveItems(loan);
+          final Item updatedLoan = Iservice.saveItem(loan);
           return ResponseEntity.ok().body(updatedLoan);
-		
 	}
-	
 	@DeleteMapping("/{id}")
 	public Map<String, Boolean> deleteLoan(@PathVariable(value="id") Long pId) throws ResourceNotFoundException{
 		Item l=Iservice.getSingleItem(pId).orElseThrow(() -> new ResourceNotFoundException("Loan not found for this Id :"+pId));
