@@ -25,6 +25,7 @@ import com.wellsfargo.training.fargoloans.dataviews.EmployeeDetails;
 import com.wellsfargo.training.fargoloans.exception.ResourceNotFoundException;
 import com.wellsfargo.training.fargoloans.model.Employee;
 import com.wellsfargo.training.fargoloans.model.User;
+import com.wellsfargo.training.fargoloans.payload.response.MessageResponse;
 import com.wellsfargo.training.fargoloans.repository.EmployeeRepository;
 import com.wellsfargo.training.fargoloans.service.EmployeeService;
 
@@ -45,6 +46,45 @@ public class EmployeeController {
 		Employee e2 = eservice.saveEmployee(e);
 		return e2;
 	}
+	@PostMapping("/register")
+	public ResponseEntity<?>registerEmployee(@Validated @RequestBody Employee e) throws ResourceNotFoundException{
+		Employee e1 = eservice.getEmployee(e.getEmpId()).orElseThrow(() -> new ResourceNotFoundException("Employee not found for this Id :"));
+		boolean b = true;
+		System.out.println(e.getEmpName());
+		System.out.println(e1.getEmpName());
+		if(!(e1.getEmpName().equals(e.getEmpName()))) {
+			b=false;
+			return ResponseEntity.badRequest().body("empName Wrong creds added");
+			
+		}
+		if(!(e1.getDesignation().equals(e.getDesignation()))) {
+			b= false;
+			return ResponseEntity.badRequest().body("empDes Wrong creds added");
+			
+		}
+		if(!(e1.getDepartment().equals(e.getDepartment()))) {
+			b= false;
+			return ResponseEntity.badRequest().body("empDep Wrong creds added");
+			
+		}
+		if(  e1.getDob().compareTo(e.getDob()) == 0 ) {
+			b= false;
+			
+		}
+		if(  e1.getDoj().compareTo(e.getDoj()) == 0 ) {
+			b= false;
+			
+		}
+		
+		if(!b) {
+			return ResponseEntity.badRequest().body("wrong creds added");
+		}
+		
+		e1.setPassword(e.getPassword());
+		eservice.saveEmployee(e1);
+		return ResponseEntity.ok().body("Registered");
+		
+	} 
 	@GetMapping("/all")
 	  public ResponseEntity<List<EmployeeDetails>> allEmployee() {
 		  return new ResponseEntity<List<EmployeeDetails>>(employeeRepository.findAllBy(), HttpStatus.OK);
