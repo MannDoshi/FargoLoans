@@ -60,11 +60,11 @@ public class EmployeeController {
 	@PutMapping("/{id}")
 	public ResponseEntity<Employee> updateProduct(@PathVariable(value="id") Long pId, @Validated @RequestBody Employee e) throws ResourceNotFoundException{
 		Employee employee=eservice.getSingleProduct(pId).orElseThrow(() -> new ResourceNotFoundException("Employee not found for this Id :"+pId));
-		employee.setDepartment(e.getDepartment());
-		employee.setDesignation(e.getDesignation());
-		employee.setDob(e.getDob());
-		employee.setDoj(e.getDoj());
-		employee.setEmpName(e.getEmpName());
+//		employee.setDepartment(e.getDepartment());
+//		employee.setDesignation(e.getDesignation());
+//		employee.setDob(e.getDob());
+//		employee.setDoj(e.getDoj());
+//		employee.setEmpName(e.getEmpName());
 		final Employee updateProduct=eservice.saveEmployee(employee);
 		return ResponseEntity.ok().body(updateProduct);
 	}
