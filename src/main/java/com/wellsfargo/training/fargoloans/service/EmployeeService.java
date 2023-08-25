@@ -1,5 +1,6 @@
 package com.wellsfargo.training.fargoloans.service;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,6 +35,10 @@ public class EmployeeService {
 	public Optional<Employee> getEmployee(Long id) {
 		
 		return Erepo.findById(id);
+	}	
+	public List<Employee> getEmployees() {
+		
+		return Erepo.findAll();
 	}
 	
 }
