@@ -68,7 +68,8 @@ public class EmployeeIssueController {
 	@PutMapping("/{id}")
 	public ResponseEntity<EmployeeIssue> updateEmployeeIssue(@PathVariable(value="id") Long pId, @Validated @RequestBody EmployeeIssue ec) throws ResourceNotFoundException{
 		EmployeeIssue employeeIssue = eiservice.getSingleEmployeeIssue(pId).orElseThrow(() -> new ResourceNotFoundException("Employee not found for this Id :"+pId));
-		employeeIssue.setEmployeeIssueIssueDate(ec.getIssueDate());
+		employeeIssue.setIssueDate(ec.getIssueDate());
+		employeeIssue.setReturn_date(ec.getReturn_date());
 		final EmployeeIssue updatedEC = eiservice.saveEmployeeIssue(employeeIssue);
 		return ResponseEntity.ok().body(updatedEC);
 	}
