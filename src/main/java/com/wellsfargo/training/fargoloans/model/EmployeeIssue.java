@@ -38,6 +38,9 @@ public class EmployeeIssue {
 	@JsonFormat (pattern="yyyy-MM-dd")
 	@Column(name="return_date")
 	private Date return_date;
+	
+	@Column(name="issue_status")
+	private char issueStatus;
 
 	public long getIssueId() {
 		return issueId;
@@ -53,6 +56,14 @@ public class EmployeeIssue {
 
 	public void setEmployee(Employee employee) {
 		this.employee = employee;
+	}
+	
+	public char getIssueStatus() {
+		return issueStatus;
+	}
+
+	public void setIssueStatus(char issueStatus) {
+		this.issueStatus = issueStatus;
 	}
 
 	public Item getItem() {

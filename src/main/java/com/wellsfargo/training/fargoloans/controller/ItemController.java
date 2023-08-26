@@ -27,7 +27,7 @@ import com.wellsfargo.training.fargoloans.service.ItemService;
 
 @CrossOrigin(origins = "http://localhost:3000")
 @RestController
-@RequestMapping(value="/api/item/")
+@RequestMapping(value="/api/item")
 public class ItemController {
 
 	@Autowired
@@ -57,7 +57,7 @@ public class ItemController {
 		Item loan=Iservice.getSingleItem(pId).orElseThrow(() -> new ResourceNotFoundException("Loan not found for this Id :"+pId));
           loan.setItemDesc(l.getItemDesc());
           loan.setItemCategory(l.getItemCategory());
-          loan.setIssueStatus(l.getIssueStatus());
+//          loan.setIssueStatus(l.getIssueStatus());
           loan.setItemMake(l.getItemMake());
           loan.setItemValuation(l.getItemValuation());
           

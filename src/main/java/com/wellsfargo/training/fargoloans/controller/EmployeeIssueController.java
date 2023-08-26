@@ -70,6 +70,7 @@ public class EmployeeIssueController {
 		EmployeeIssue employeeIssue = eiservice.getSingleEmployeeIssue(pId).orElseThrow(() -> new ResourceNotFoundException("Employee not found for this Id :"+pId));
 		employeeIssue.setIssueDate(ec.getIssueDate());
 		employeeIssue.setReturn_date(ec.getReturn_date());
+		employeeIssue.setIssueStatus(ec.getIssueStatus());
 		final EmployeeIssue updatedEC = eiservice.saveEmployeeIssue(employeeIssue);
 		return ResponseEntity.ok().body(updatedEC);
 	}
