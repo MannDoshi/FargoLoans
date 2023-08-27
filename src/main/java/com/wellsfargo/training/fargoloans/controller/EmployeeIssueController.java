@@ -23,8 +23,12 @@ import com.wellsfargo.training.fargoloans.dataviews.EmployeeDetails;
 import com.wellsfargo.training.fargoloans.exception.ResourceNotFoundException;
 import com.wellsfargo.training.fargoloans.model.Employee;
 import com.wellsfargo.training.fargoloans.model.EmployeeIssue;
+import com.wellsfargo.training.fargoloans.model.Item;
+import com.wellsfargo.training.fargoloans.model.Loan;
 import com.wellsfargo.training.fargoloans.repository.EmployeeIssueRepository;
 import com.wellsfargo.training.fargoloans.repository.EmployeeRepository;
+import com.wellsfargo.training.fargoloans.repository.ItemRepository;
+import com.wellsfargo.training.fargoloans.repository.LoanRepository;
 import com.wellsfargo.training.fargoloans.service.EmployeeIssueService;
 import com.wellsfargo.training.fargoloans.service.EmployeeService;
 
@@ -38,6 +42,12 @@ public class EmployeeIssueController {
 	@Autowired
 	private EmployeeIssueRepository employeeIssueRepository;
 	
+	@Autowired
+	private ItemRepository Irepo;
+	
+	@Autowired
+	private LoanRepository Lrepo;
+	
 	@Autowired 
 	private EmployeeRepository Erepo;
 	
@@ -46,27 +56,43 @@ public class EmployeeIssueController {
 	
 	
 	
-	@PostMapping("/{empId}")
-	public void addEmployeeIssue(@PathVariable Long empId, @Validated @RequestBody EmployeeIssue ec) throws ResourceNotFoundException {
-	//	EmployeeIssue e2 = eiservice.saveEmployeeIssue(ec);
-		//Employee e=
-		try {
-			 Erepo.findById(empId).map(e ->{
-				//System.out.println(ec);
-				ec.setEmployee(e);
-				return eiservice.saveEmployeeIssue(ec);
-			}).orElseThrow(() -> new ResourceNotFoundException("Employee not found for this Id :"+empId));//ma
-		}catch(Exception e) {
-//			e.printStackTrace();
-			//System.out.println("Errrorrr");
-		}
-//		return Erepo.findById(empId).map(e ->{
+	@PostMapping("/{empId}/{itemId}/{loanId}")
+	public void addEmployeeIssue(@PathVariable Long empId, @PathVariable Long itemId, @PathVariable Long loanId, @Validated @RequestBody EmployeeIssue ei) throws ResourceNotFoundException {
+
+//		 Erepo.findById(empId).map(e ->{
+//			//System.out.println(ei);
+//			ei.setEmployee(e);
+////			Irepo.findById(itemId).map(i -> {
+////				ei.setItem(i);
+////	
+////			});
 //			
-//			ec.setEmployee(e);
-//			return eiservice.saveEmployeeIssue(ec);
-//		}).orElseThrow(() -> new ResourceNotFoundException("Employee not found for this Id :"+empId));//map(e ->{
-//		
-		//return e2;
+//			return eiservice.saveEmployeeIssue(ei);
+//		}).orElseThrow(() -> new ResourceNotFoundException("Employee not found for this Id :"+empId));//ma
+		
+		Optional<Employee> oe = Erepo.findById(empId);
+		if(oe.isPresent()) {
+			Employee e = oe.get();
+			ei.setEmployee(e);
+		}
+//		else {
+//			throw new ResourceNotFoundException("Employee not found for this Id :"+empId);
+//		}
+		Optional<Item> oi = Irepo.findById(itemId);
+		if(oi.isPresent()) {
+			Item i = oi.get();
+			ei.setItem(i);
+		}
+		
+		Optional<Loan> ol = Lrepo.findById(loanId);
+		if(ol.isPresent()) {
+			Loan l = ol.get();
+			ei.setLoan(l);
+		}
+		
+			
+		eiservice.saveEmployeeIssue(ei);
+//		}).orElseThrow(() -> new ResourceNotFoundException("Employee not found for this Id :"+empId));//ma
 		
 	}
 	
@@ -91,12 +117,11 @@ public class EmployeeIssueController {
 	}
 	
 	@PutMapping("/{id}")
-	public ResponseEntity<EmployeeIssue> updateEmployeeIssue(@PathVariable(value="id") Long pId, @Validated @RequestBody EmployeeIssue ec) throws ResourceNotFoundException{
+	public ResponseEntity<EmployeeIssue> updateEmployeeIssue(@PathVariable(value="id") Long pId, @Validated @RequestBody EmployeeIssue ei) throws ResourceNotFoundException{
 		EmployeeIssue employeeIssue = eiservice.getSingleEmployeeIssue(pId).orElseThrow(() -> new ResourceNotFoundException("Employee not found for this Id :"+pId));
-		employeeIssue.setIssueDate(ec.getIssueDate());
-		employeeIssue.setReturn_date(ec.getReturn_date());
-		employeeIssue.setIssueStatus(ec.getIssueStatus());
-		final EmployeeIssue updatedEC = eiservice.saveEmployeeIssue(employeeIssue);
-		return ResponseEntity.ok().body(updatedEC);
+		employeeIssue.setIssueDate(ei.getIssueDate());
+		employeeIssue.setReturn_date(ei.getReturn_date());
+		final EmployeeIssue updatedEI = eiservice.saveEmployeeIssue(employeeIssue);
+		return ResponseEntity.ok().body(updatedEI);
 	}
 }
