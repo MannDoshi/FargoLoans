@@ -33,6 +33,18 @@ public class EmployeeIssue {
 	@JoinColumn(name="item_id")
 	private Item item;
 	
+	@ManyToOne(cascade=CascadeType.ALL)
+	@JoinColumn(name="loan_id")
+	private Loan loan;
+	
+	public Loan getLoan() {
+		return loan;
+	}
+
+	public void setLoan(Loan loan) {
+		this.loan = loan;
+	}
+
 	@Column(name="issue_date")
 	@JsonFormat (pattern="yyyy-MM-dd")
 	private Date issueDate;
@@ -42,7 +54,34 @@ public class EmployeeIssue {
 	private Date return_date;
 	
 	@Column(name="issue_status")
-	private char issueStatus;
+//	YES, NO, default?
+	private String issueStatus;
+	
+	@Column(name="item_value")
+	private String itemValue;
+	
+	@Column(name="item_make")
+	private String itemMake;
+
+	public String getItemValue() {
+		return itemValue;
+	}
+
+	public void setItemValue(String itemValue) {
+		this.itemValue = itemValue;
+	}
+
+	public String getItemMake() {
+		return itemMake;
+	}
+
+	public void setItemMake(String itemMake) {
+		this.itemMake = itemMake;
+	}
+
+	public void setIssueStatus(String issueStatus) {
+		this.issueStatus = issueStatus;
+	}
 
 	public long getIssueId() {
 		return issueId;
@@ -60,13 +99,6 @@ public class EmployeeIssue {
 		this.employee = employee;
 	}
 	
-	public char getIssueStatus() {
-		return issueStatus;
-	}
-
-	public void setIssueStatus(char issueStatus) {
-		this.issueStatus = issueStatus;
-	}
 
 	public Item getItem() {
 		return item;
