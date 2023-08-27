@@ -3,6 +3,9 @@ package com.wellsfargo.training.fargoloans.model;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -11,9 +14,11 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
+import lombok.NoArgsConstructor;
 
 @Entity
 @Table(name="loan_card_master")
+@NoArgsConstructor 
 public class Loan {
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
@@ -26,10 +31,19 @@ public class Loan {
 	@Column(name="duration_in_years")
 	private int durationInYears;
 
+	
+	
+	@OneToMany(cascade=CascadeType.ALL, mappedBy = "loan")
+	@Column(name="employee_issue_details")
+	@JsonBackReference
+	private List<EmployeeIssue> employeeIssueList= new ArrayList<>();
+	
 	@OneToMany(cascade=CascadeType.ALL, mappedBy = "loan")
 	@Column(name="employee_card_details")
-	private List<EmployeeCard> cardIdsList= new ArrayList<>();
+//	@JsonBackReference
+	private List<EmployeeCard> employeeCardList= new ArrayList<>();
 
+	
 	public long getLoanId() {
 		return loanId;
 	}
@@ -54,13 +68,22 @@ public class Loan {
 		this.durationInYears = durationInYears;
 	}
 
-	public List<EmployeeCard> getCardIdsList() {
-		return cardIdsList;
+	public List<EmployeeIssue> getEmployeeIssueList() {
+		return employeeIssueList;
 	}
 
-	public void setCardIdsList(List<EmployeeCard> cardIdsList) {
-		this.cardIdsList = cardIdsList;
+	public void setEmployeeIssueList(List<EmployeeIssue> employeeIssueList) {
+		this.employeeIssueList = employeeIssueList;
 	}
+
+	public List<EmployeeCard> getEmployeeCardList() {
+		return employeeCardList;
+	}
+
+	public void setEmployeeCardList(List<EmployeeCard> employeeCardList) {
+		this.employeeCardList = employeeCardList;
+	}
+
 
 	
 }

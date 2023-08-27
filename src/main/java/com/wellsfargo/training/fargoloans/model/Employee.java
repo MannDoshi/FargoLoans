@@ -6,6 +6,7 @@ import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
@@ -16,9 +17,13 @@ import jakarta.persistence.MapsId;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 @Entity
 @Table(name="employee_master")
+@NoArgsConstructor 
 public class Employee {
 
 	@Id
@@ -89,15 +94,17 @@ public class Employee {
 	private Date doj;
 	
 	@OneToMany(mappedBy = "employee", cascade=CascadeType.ALL)
-//	@JsonBackReference
+	@JsonBackReference
 	private List<EmployeeIssue> issueIdsList= new ArrayList<>();
 
 	@OneToMany(mappedBy = "employee", cascade=CascadeType.ALL)
 	@Column(name="card_ids")
+//	@JsonBackReference
 	private List<EmployeeCard> empCardsList= new ArrayList<>();
 	
 	@OneToOne
 	@JoinColumn(name="user_id")
+//	@JsonBackReference
 	private User user;
 	
 

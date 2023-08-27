@@ -5,10 +5,14 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
+import lombok.NoArgsConstructor;
 
 @Entity
 @Table(name = "users", 
@@ -16,6 +20,7 @@ import jakarta.validation.constraints.Size;
       @UniqueConstraint(columnNames = "username"),
       @UniqueConstraint(columnNames = "email") 
     })
+@NoArgsConstructor 
 public class User {
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -43,6 +48,7 @@ public class User {
   
   @OneToOne(mappedBy = "user")
   @MapsId
+//  @JsonManagedReference
   private Employee employee;
 
   public Employee getEmployee() {

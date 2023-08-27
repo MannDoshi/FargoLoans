@@ -2,6 +2,9 @@ package com.wellsfargo.training.fargoloans.model;
 
 import java.util.Date;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -11,11 +14,21 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
+import lombok.NoArgsConstructor;
 
 @Entity
 @Table(name="employee_card_details")
+@NoArgsConstructor 
 public class EmployeeCard {
 	
+	public long getCardId() {
+		return cardId;
+	}
+
+	public void setCardId(long cardId) {
+		this.cardId = cardId;
+	}
+
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Column(name="card_id")
@@ -23,9 +36,11 @@ public class EmployeeCard {
 	
 	@ManyToOne(cascade=CascadeType.ALL)
 	@JoinColumn(name="employee_id")
+//	@JsonManagedReference
 	private Employee employee;
 	
 	@ManyToOne(cascade=CascadeType.ALL)
+//	@JsonManagedReference
 	@JoinColumn(name="loan_id")
 	private Loan loan;
 	
