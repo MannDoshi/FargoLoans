@@ -52,13 +52,13 @@ public class EmployeeIssueController {
 		//Employee e=
 		try {
 			 Erepo.findById(empId).map(e ->{
-				System.out.println(ec);
+				//System.out.println(ec);
 				ec.setEmployee(e);
 				return eiservice.saveEmployeeIssue(ec);
 			}).orElseThrow(() -> new ResourceNotFoundException("Employee not found for this Id :"+empId));//ma
 		}catch(Exception e) {
 //			e.printStackTrace();
-			System.out.println("Errrorrr");
+			//System.out.println("Errrorrr");
 		}
 //		return Erepo.findById(empId).map(e ->{
 //			
