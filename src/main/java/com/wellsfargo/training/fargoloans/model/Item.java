@@ -3,6 +3,8 @@ package com.wellsfargo.training.fargoloans.model;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -11,9 +13,11 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
+import lombok.NoArgsConstructor;
 
 @Entity
 @Table(name="item_master")
+@NoArgsConstructor 
 public class Item {
 	
 	@Id
@@ -36,6 +40,7 @@ public class Item {
 
 	@OneToMany(cascade=CascadeType.ALL, mappedBy = "item")
 	@Column(name="issue_ids")
+	@JsonBackReference
 	private List<EmployeeIssue> issueIdList= new ArrayList<>();
 
 	public long getItemId() {

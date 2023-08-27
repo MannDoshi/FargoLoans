@@ -14,10 +14,16 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
+import lombok.NoArgsConstructor;
 
 @Entity
 @Table(name="employee_issue_details")
+@NoArgsConstructor 
 public class EmployeeIssue {
+
+	public String getIssueStatus() {
+		return issueStatus;
+	}
 
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
@@ -26,15 +32,17 @@ public class EmployeeIssue {
 	
 	@ManyToOne(cascade=CascadeType.ALL)
 	@JoinColumn(name="employee_id")
-//	@JsonManagedReference
+	@JsonManagedReference
 	private Employee employee;
 	
 	@ManyToOne(cascade=CascadeType.ALL)
 	@JoinColumn(name="item_id")
+	@JsonManagedReference
 	private Item item;
 	
 	@ManyToOne(cascade=CascadeType.ALL)
 	@JoinColumn(name="loan_id")
+	@JsonManagedReference
 	private Loan loan;
 	
 	public Loan getLoan() {

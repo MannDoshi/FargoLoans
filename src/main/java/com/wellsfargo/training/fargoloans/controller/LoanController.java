@@ -28,7 +28,7 @@ import com.wellsfargo.training.fargoloans.service.LoanService;
 
 @CrossOrigin(origins = "http://localhost:3000")
 @RestController
-@RequestMapping(value="/api/loan/")
+@RequestMapping(value="/api/loan")
 public class LoanController {
 
 	@Autowired
@@ -38,7 +38,7 @@ public class LoanController {
 	private LoanRepository Lrepo;
 	
 	@PostMapping("/")
-	private Loan saveLoan(@Validated @RequestBody Loan l) {
+	public Loan saveLoan(@Validated @RequestBody Loan l) {
 		Loan l2 = Lservice.saveLoans(l);
 		return l2;
 	}
