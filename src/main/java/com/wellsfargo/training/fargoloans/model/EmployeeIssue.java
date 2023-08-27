@@ -3,6 +3,7 @@ package com.wellsfargo.training.fargoloans.model;
 import java.util.Date;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
@@ -25,6 +26,7 @@ public class EmployeeIssue {
 	
 	@ManyToOne(cascade=CascadeType.ALL)
 	@JoinColumn(name="employee_id")
+//	@JsonManagedReference
 	private Employee employee;
 	
 	@ManyToOne(cascade=CascadeType.ALL)
