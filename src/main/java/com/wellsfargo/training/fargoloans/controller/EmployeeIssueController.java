@@ -35,14 +35,39 @@ public class EmployeeIssueController {
 	@Autowired
 	private EmployeeIssueService eiservice;
 	
-//	@Autowired
+	@Autowired
 	private EmployeeIssueRepository employeeIssueRepository;
 	
+	@Autowired 
+	private EmployeeRepository Erepo;
 	
-	@PostMapping("/")
-	public EmployeeIssue addEmployeeIssue(@Validated @RequestBody EmployeeIssue ec) {
-		EmployeeIssue e2 = eiservice.saveEmployeeIssue(ec);
-		return e2;
+	@Autowired
+	private EmployeeService eservice;
+	
+	
+	
+	@PostMapping("/{empId}")
+	public void addEmployeeIssue(@PathVariable Long empId, @Validated @RequestBody EmployeeIssue ec) throws ResourceNotFoundException {
+	//	EmployeeIssue e2 = eiservice.saveEmployeeIssue(ec);
+		//Employee e=
+		try {
+			 Erepo.findById(empId).map(e ->{
+				System.out.println(ec);
+				ec.setEmployee(e);
+				return eiservice.saveEmployeeIssue(ec);
+			}).orElseThrow(() -> new ResourceNotFoundException("Employee not found for this Id :"+empId));//ma
+		}catch(Exception e) {
+//			e.printStackTrace();
+			System.out.println("Errrorrr");
+		}
+//		return Erepo.findById(empId).map(e ->{
+//			
+//			ec.setEmployee(e);
+//			return eiservice.saveEmployeeIssue(ec);
+//		}).orElseThrow(() -> new ResourceNotFoundException("Employee not found for this Id :"+empId));//map(e ->{
+//		
+		//return e2;
+		
 	}
 	
 	@GetMapping("/all")

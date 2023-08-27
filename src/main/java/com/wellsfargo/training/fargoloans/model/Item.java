@@ -23,9 +23,7 @@ public class Item {
 	
 	@Column(name="itm_description")
 	private String itemDesc;
-	
-	@Column(name="issue_status")
-	private char issueStatus;
+
 	
 	@Column(name="item_make")
 	private String itemMake;
@@ -56,13 +54,7 @@ public class Item {
 		this.itemDesc = itemDesc;
 	}
 
-	public char getIssueStatus() {
-		return issueStatus;
-	}
 
-	public void setIssueStatus(char issueStatus) {
-		this.issueStatus = issueStatus;
-	}
 
 	public String getItemMake() {
 		return itemMake;

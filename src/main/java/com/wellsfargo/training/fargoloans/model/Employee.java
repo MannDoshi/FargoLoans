@@ -87,7 +87,6 @@ public class Employee {
 	private Date doj;
 	
 	@OneToMany(mappedBy = "employee", cascade=CascadeType.ALL)
-	@Column(name="issue_ids")
 	private List<EmployeeIssue> issueIdsList= new ArrayList<>();
 
 	@OneToMany(mappedBy = "employee", cascade=CascadeType.ALL)
