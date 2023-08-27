@@ -128,12 +128,20 @@ public class AuthController {
         }
       });
     }
+//    user.setRoles(roles);
+//    userRepository.save(user);
+//    
+//    Employee employee=signUpRequest.getEmployee();
+//    employee.setUser(user);
+//    employeeRepository.save(employee);
+    
+  
+    Employee employee=signUpRequest.getEmployee();
+    employeeRepository.save(employee);
+    
+    user.setEmployee(employee);
     user.setRoles(roles);
     userRepository.save(user);
-    
-    Employee employee=signUpRequest.getEmployee();
-    employee.setUser(user);
-    employeeRepository.save(employee);
     
     return ResponseEntity.ok(new MessageResponse("User registered successfully!"));
   }
