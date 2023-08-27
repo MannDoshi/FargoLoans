@@ -9,6 +9,7 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -52,7 +53,8 @@ public class EmployeeController {
 
 	@GetMapping("/{id}")
 	 public Optional<Employee> getEmployee(@PathVariable Long id) {
-//		
+		Object user = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		System.out.println("user is ");
 		Optional<Employee> res=eservice.getEmployee(id);
 		 return res;
 	}
