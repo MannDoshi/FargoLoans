@@ -42,10 +42,18 @@ public class User {
 
   
   @OneToOne(mappedBy = "user")
+  @MapsId
   private Employee employee;
-  
-  
-  public User() {
+
+  public Employee getEmployee() {
+	return employee;
+}
+
+public void setEmployee(Employee employee) {
+	this.employee = employee;
+}
+
+public User() {
   }
 
   public User(String username, String email, String password) {
