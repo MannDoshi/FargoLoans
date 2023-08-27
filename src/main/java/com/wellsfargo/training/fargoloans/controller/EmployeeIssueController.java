@@ -50,16 +50,16 @@ public class EmployeeIssueController {
 	public void addEmployeeIssue(@PathVariable Long empId, @Validated @RequestBody EmployeeIssue ec) throws ResourceNotFoundException {
 	//	EmployeeIssue e2 = eiservice.saveEmployeeIssue(ec);
 		//Employee e=
-		try {
-			 Erepo.findById(empId).map(e ->{
-				//System.out.println(ec);
-				ec.setEmployee(e);
-				return eiservice.saveEmployeeIssue(ec);
-			}).orElseThrow(() -> new ResourceNotFoundException("Employee not found for this Id :"+empId));//ma
-		}catch(Exception e) {
+//		try {
+//			 Erepo.findById(empId).map(e ->{
+//				//System.out.println(ec);
+//				ec.setEmployee(e);
+//				return eiservice.saveEmployeeIssue(ec);
+//			}).orElseThrow(() -> new ResourceNotFoundException("Employee not found for this Id :"+empId));//ma
+//		}catch(Exception e) {
 //			e.printStackTrace();
 			//System.out.println("Errrorrr");
-		}
+//		}
 //		return Erepo.findById(empId).map(e ->{
 //			
 //			ec.setEmployee(e);

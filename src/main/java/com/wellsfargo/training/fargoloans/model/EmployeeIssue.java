@@ -17,7 +17,7 @@ import jakarta.persistence.Table;
 
 @Entity
 @Table(name="employee_issue_details")
-public class EmployeeIssue {
+public class EmployeeIssue{
 
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
@@ -122,6 +122,11 @@ public class EmployeeIssue {
 
 	public void setReturn_date(Date return_date) {
 		this.return_date = return_date;
+	}
+
+	public String getIssueStatus() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 	
