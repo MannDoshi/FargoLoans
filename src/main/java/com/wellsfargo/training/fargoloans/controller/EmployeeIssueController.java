@@ -138,5 +138,13 @@ public class EmployeeIssueController {
 //		return res;
 //	}
 //	
+
+
+	@GetMapping("emp/{empId}")
+	public ResponseEntity<List<EmployeeIssue>> getAllEmployeeIssue(@PathVariable Long empId) throws ResourceNotFoundException{
+		List<EmployeeIssue> res = eiservice.getEmployeeIssueByEmployeeId(empId);
+		return ResponseEntity.ok().body(res);
+		
+	}
 	
 }
