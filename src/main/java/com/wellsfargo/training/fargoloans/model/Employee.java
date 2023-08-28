@@ -11,6 +11,8 @@ import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.MapsId;
@@ -24,9 +26,12 @@ import lombok.Setter;
 @Entity
 @Table(name="employee_master")
 @NoArgsConstructor 
+@Getter
+@Setter
 public class Employee {
 
 	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name="employee_id")
 	private long empId;
 	
@@ -35,8 +40,6 @@ public class Employee {
 	
 	@Column(name="password")
 	private String password;
-	
-	public Employee() {}
 	
 	public Employee(long empId, String empName, String password, String designation, String department, Boolean isAdmin,
 			Date dob, Date doj, List<EmployeeIssue> issueIdsList, List<EmployeeCard> empCardsList) {
@@ -52,14 +55,6 @@ public class Employee {
 		this.empCardsList = empCardsList;
 	}
 
-	public String getPassword() {
-		return password;
-	}
-
-	public void setPassword(String password) {
-		this.password = password;
-	}
-
 	@Column(name="designation")
 	private String designation;
 	
@@ -69,32 +64,19 @@ public class Employee {
 	@Column(name="is_admin")
 	private Boolean isAdmin;
 	
-	public Boolean getIsAdmin() {
-		return isAdmin;
-	}
 
-	public void setIsAdmin(Boolean isAdmin) {
-		this.isAdmin = isAdmin;
-	}
 
 	@JsonFormat (pattern="yyyy-MM-dd")
 	@Column(name="date_of_birth")
 	private Date dob;
 	
-	public User getUser() {
-		return user;
-	}
-
-	public void setUser(User user) {
-		this.user = user;
-	}
-
+	
 	@JsonFormat (pattern="yyyy-MM-dd")
 	@Column(name="date_of_joining")
 	private Date doj;
 	
 	@OneToMany(mappedBy = "employee", cascade=CascadeType.ALL)
-	@JsonBackReference
+//	@JsonBackReference
 	private List<EmployeeIssue> issueIdsList= new ArrayList<>();
 
 	@OneToMany(mappedBy = "employee", cascade=CascadeType.ALL)
@@ -106,9 +88,7 @@ public class Employee {
 	@JoinColumn(name="user_id")
 //	@JsonBackReference
 	private User user;
-	
 
-	
 	public long getEmpId() {
 		return empId;
 	}
@@ -125,6 +105,14 @@ public class Employee {
 		this.empName = empName;
 	}
 
+	public String getPassword() {
+		return password;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
+	}
+
 	public String getDesignation() {
 		return designation;
 	}
@@ -139,6 +127,14 @@ public class Employee {
 
 	public void setDepartment(String department) {
 		this.department = department;
+	}
+
+	public Boolean getIsAdmin() {
+		return isAdmin;
+	}
+
+	public void setIsAdmin(Boolean isAdmin) {
+		this.isAdmin = isAdmin;
 	}
 
 	public Date getDob() {
@@ -172,6 +168,13 @@ public class Employee {
 	public void setEmpCardsList(List<EmployeeCard> empCardsList) {
 		this.empCardsList = empCardsList;
 	}
-	
+
+	public User getUser() {
+		return user;
+	}
+
+	public void setUser(User user) {
+		this.user = user;
+	}
 	
 }
