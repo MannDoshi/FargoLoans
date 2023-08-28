@@ -33,6 +33,7 @@ import com.wellsfargo.training.fargoloans.repository.RoleRepository;
 import com.wellsfargo.training.fargoloans.repository.UserRepository;
 import com.wellsfargo.training.fargoloans.security.jwt.JwtUtils;
 import com.wellsfargo.training.fargoloans.security.service.UserDetailsImpl;
+import com.wellsfargo.training.fargoloans.service.EmployeeService;
 
 import jakarta.validation.Valid;
 
@@ -54,9 +55,13 @@ public class AuthController {
 
   @Autowired
   PasswordEncoder encoder;
+  
 
   @Autowired
   JwtUtils jwtUtils;
+  
+  @Autowired
+  EmployeeService eService;
 
   @PostMapping("/signin")
   public ResponseEntity<?> authenticateUser(@Valid @RequestBody LoginRequest loginRequest) {
@@ -101,7 +106,7 @@ public class AuthController {
 
     Set<String> strRoles = signUpRequest.getRole();
     Set<Role> roles = new HashSet<>();
-
+    user.setRoles(roles);
     if (strRoles == null) {
       Role userRole = roleRepository.findByName(ERole.ROLE_USER)
           .orElseThrow(() -> new RuntimeException("Error: Role is not found."));
@@ -109,13 +114,13 @@ public class AuthController {
     } else {
       strRoles.forEach(role -> {
         switch (role) {
-        case "admin":
+        case "ROLE_ADMIN":
           Role adminRole = roleRepository.findByName(ERole.ROLE_ADMIN)
               .orElseThrow(() -> new RuntimeException("Error: Role is not found."));
           roles.add(adminRole);
 
           break;
-        case "mod":
+        case "ROLE_MODERATOR":
           Role modRole = roleRepository.findByName(ERole.ROLE_MODERATOR)
               .orElseThrow(() -> new RuntimeException("Error: Role is not found."));
           roles.add(modRole);
@@ -128,21 +133,10 @@ public class AuthController {
         }
       });
     }
-//    user.setRoles(roles);
-//    userRepository.save(user);
-//    
-//    Employee employee=signUpRequest.getEmployee();
-//    employee.setUser(user);
-//    employeeRepository.save(employee);
-    
-  
+    System.out.println(roles);
     Employee employee=signUpRequest.getEmployee();
-    employeeRepository.save(employee);
-    
-    user.setEmployee(employee);
-    user.setRoles(roles);
-    userRepository.save(user);
-    
+    eService.createEmployee(employee,user);
+
     return ResponseEntity.ok(new MessageResponse("User registered successfully!"));
   }
   

@@ -13,11 +13,15 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 @Entity
 @Table(name="item_master")
 @NoArgsConstructor 
+@Getter
+@Setter
 public class Item {
 	
 	@Id
@@ -59,8 +63,6 @@ public class Item {
 		this.itemDesc = itemDesc;
 	}
 
-
-
 	public String getItemMake() {
 		return itemMake;
 	}
@@ -92,6 +94,7 @@ public class Item {
 	public void setIssueIdList(List<EmployeeIssue> issueIdList) {
 		this.issueIdList = issueIdList;
 	}
+
 	
 	
 }

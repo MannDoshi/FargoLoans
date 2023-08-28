@@ -14,11 +14,15 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 @Entity
 @Table(name="loan_card_master")
 @NoArgsConstructor 
+@Getter
+@Setter
 public class Loan {
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
@@ -31,8 +35,6 @@ public class Loan {
 	@Column(name="duration_in_years")
 	private int durationInYears;
 
-	
-	
 	@OneToMany(cascade=CascadeType.ALL, mappedBy = "loan")
 	@Column(name="employee_issue_details")
 	@JsonBackReference
@@ -43,7 +45,6 @@ public class Loan {
 //	@JsonBackReference
 	private List<EmployeeCard> employeeCardList= new ArrayList<>();
 
-	
 	public long getLoanId() {
 		return loanId;
 	}
@@ -84,6 +85,4 @@ public class Loan {
 		this.employeeCardList = employeeCardList;
 	}
 
-
-	
 }

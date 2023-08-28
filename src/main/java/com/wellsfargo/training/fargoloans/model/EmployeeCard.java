@@ -14,20 +14,17 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 @Entity
 @Table(name="employee_card_details")
 @NoArgsConstructor 
+@Getter
+@Setter
 public class EmployeeCard {
 	
-	public long getCardId() {
-		return cardId;
-	}
-
-	public void setCardId(long cardId) {
-		this.cardId = cardId;
-	}
 
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
@@ -46,6 +43,14 @@ public class EmployeeCard {
 	
 	@Column(name="card_issue_date")
 	private Date cardIssueDate;
+
+	public long getCardId() {
+		return cardId;
+	}
+
+	public void setCardId(long cardId) {
+		this.cardId = cardId;
+	}
 
 	public Employee getEmployee() {
 		return employee;
@@ -70,6 +75,5 @@ public class EmployeeCard {
 	public void setCardIssueDate(Date cardIssueDate) {
 		this.cardIssueDate = cardIssueDate;
 	}
-	
 	
 }
