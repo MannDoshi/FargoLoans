@@ -6,6 +6,7 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.wellsfargo.training.fargoloans.enums.EmployeeIssueStatus;
 import com.wellsfargo.training.fargoloans.model.Employee;
 import com.wellsfargo.training.fargoloans.model.EmployeeIssue;
 import com.wellsfargo.training.fargoloans.repository.EmployeeIssueRepository;
@@ -51,5 +52,14 @@ public class EmployeeIssueService {
 		List < EmployeeIssue > employeeIssues= EIrepo.findAllByEmployee(employee);
 		return employeeIssues;
 	}
-	
+	public List<EmployeeIssue> getEmployeeIssueByEmployeeIdByIssueStatus( long empId ,EmployeeIssueStatus status){
+		Optional<Employee> _employee=Erepo.findById(empId);
+		Employee employee=_employee.get();
+		List < EmployeeIssue > employeeIssues= EIrepo.findAllByEmployeeAndIssueStatus(employee,status);
+		return employeeIssues;
+	}
+	public List<EmployeeIssue> getEmployeeIssueByIssueStatus(EmployeeIssueStatus status){
+		List < EmployeeIssue > employeeIssues= EIrepo.findAllByIssueStatus(status);
+		return employeeIssues;
+	}
 }

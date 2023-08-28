@@ -4,11 +4,15 @@ import java.util.Date;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.wellsfargo.training.fargoloans.enums.EmployeeIssueStatus;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -25,8 +29,6 @@ import lombok.Setter;
 @Getter
 @Setter
 public class EmployeeIssue {
-
-	
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Column(name="issue_id")
@@ -34,17 +36,20 @@ public class EmployeeIssue {
 	
 	@ManyToOne(cascade=CascadeType.ALL)
 	@JoinColumn(name="employee_id")
-//	@JsonManagedReference
+//	@JsonIgnore
+	@JsonManagedReference
 	private Employee employee;
 	
 	@ManyToOne(cascade=CascadeType.ALL)
 	@JoinColumn(name="item_id")
-//	@JsonManagedReference
+	@JsonIgnore
+	@JsonManagedReference
 	private Item item;
 	
 	@ManyToOne(cascade=CascadeType.ALL)
 	@JoinColumn(name="loan_id")
-//	@JsonManagedReference
+	@JsonIgnore
+	@JsonManagedReference
 	private Loan loan;
 	
 	
@@ -57,9 +62,10 @@ public class EmployeeIssue {
 	@Column(name="return_date")
 	private Date return_date;
 	
-	@Column(name="issue_status")
+	@Enumerated(EnumType.STRING)
+	@Column(name="issue_status",columnDefinition="varchar(32) default 'WAITING' ")
 //	YES, NO, default?
-	private String issueStatus;
+	private EmployeeIssueStatus issueStatus=EmployeeIssueStatus.WAITING;
 	
 	@Column(name="item_value")
 	private String itemValue;
@@ -115,12 +121,15 @@ public class EmployeeIssue {
 		this.return_date = return_date;
 	}
 
-	public String getIssueStatus() {
+	public EmployeeIssueStatus getIssueStatus() {
 		return issueStatus;
 	}
 
-	public void setIssueStatus(String issueStatus) {
+	public void setIssueStatus(EmployeeIssueStatus issueStatus) {
 		this.issueStatus = issueStatus;
+	}
+	public void setIssueStatus(String issueStatus) {
+		this.issueStatus = EmployeeIssueStatus.valueOf(issueStatus);
 	}
 
 	public String getItemValue() {
