@@ -71,6 +71,13 @@ public class Loan {
 		this.durationInYears = durationInYears;
 	}
 
+	public Loan(long loanId, String loanType, int durationInYears) {
+		super();
+		this.loanId = loanId;
+		this.loanType = loanType;
+		this.durationInYears = durationInYears;
+	}
+
 	// public List<EmployeeIssue> getEmployeeIssueList() {
 	// return employeeIssueList;
 	// }
