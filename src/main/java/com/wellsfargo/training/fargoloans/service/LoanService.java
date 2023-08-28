@@ -14,19 +14,18 @@ import jakarta.transaction.Transactional;
 @Transactional
 public class LoanService {
 
-	 @Autowired
-	 private LoanRepository Lrepo;
-	 
-	 public Loan saveLoans(Loan l) {
-		 return Lrepo.save(l);
-	 }
-	 
-	 public Optional<Loan> getSingleLoan(long id){
-			return Lrepo.findById(id);
-		}
-		
-		public void deleteLoan(long id)
-		{
-			Lrepo.deleteById(id);
-		}
+	@Autowired
+	private LoanRepository Lrepo;
+
+	public Loan saveLoans(Loan l) {
+		return Lrepo.save(l);
+	}
+
+	public Optional<Loan> getSingleLoan(long id) {
+		return Lrepo.findById(id);
+	}
+
+	public void deleteLoan(long id) {
+		Lrepo.deleteById(id);
+	}
 }

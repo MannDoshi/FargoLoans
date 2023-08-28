@@ -4,11 +4,15 @@ import java.sql.Date;
 
 import com.wellsfargo.training.fargoloans.model.User;
 
-public interface EmployeeDetails{
-	 
+public interface EmployeeDetails {
+
 	long getEmpId();
+
 	String getDesignation();
+
 	String getDepartment();
+
 	Date getDoj();
+
 	User getUser();
 }

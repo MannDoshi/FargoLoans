@@ -19,29 +19,28 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Entity
-@Table(name="employee_card_details")
-@NoArgsConstructor 
+@Table(name = "employee_card_details")
+@NoArgsConstructor
 @Getter
 @Setter
 public class EmployeeCard {
-	
 
 	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	@Column(name="card_id")
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "card_id")
 	private long cardId;
-	
-	@ManyToOne(cascade=CascadeType.ALL)
-	@JoinColumn(name="employee_id")
-//	@JsonManagedReference
+
+	@ManyToOne(cascade = CascadeType.ALL)
+	@JoinColumn(name = "employee_id")
+	// @JsonManagedReference
 	private Employee employee;
-	
-	@ManyToOne(cascade=CascadeType.ALL)
-//	@JsonManagedReference
-	@JoinColumn(name="loan_id")
+
+	@ManyToOne(cascade = CascadeType.ALL)
+	// @JsonManagedReference
+	@JoinColumn(name = "loan_id")
 	private Loan loan;
-	
-	@Column(name="card_issue_date")
+
+	@Column(name = "card_issue_date")
 	private Date cardIssueDate;
 
 	public long getCardId() {
@@ -75,5 +74,5 @@ public class EmployeeCard {
 	public void setCardIssueDate(Date cardIssueDate) {
 		this.cardIssueDate = cardIssueDate;
 	}
-	
+
 }

@@ -20,32 +20,32 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Entity
-@Table(name="loan_card_master")
-@NoArgsConstructor 
+@Table(name = "loan_card_master")
+@NoArgsConstructor
 @Getter
 @Setter
 public class Loan {
 	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	@Column(name="loan_id")
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "loan_id")
 	private long loanId;
-	
-	@Column(name="loan_type")
+
+	@Column(name = "loan_type")
 	private String loanType;
-	
-	@Column(name="duration_in_years")
+
+	@Column(name = "duration_in_years")
 	private int durationInYears;
 
-//	@OneToMany(cascade=CascadeType.ALL, mappedBy = "loan")
-//	@Column(name="employee_issue_details")
-//	@JsonBackReference
-//	private List<EmployeeIssue> employeeIssueList= new ArrayList<>();
-	
-//	@OneToMany(cascade=CascadeType.ALL, mappedBy = "loan")
-//	@Column(name="employee_card_details")
-////	@JsonBackReference
-//	@JsonIgnore
-//	private List<EmployeeCard> employeeCardList= new ArrayList<>();
+	// @OneToMany(cascade=CascadeType.ALL, mappedBy = "loan")
+	// @Column(name="employee_issue_details")
+	// @JsonBackReference
+	// private List<EmployeeIssue> employeeIssueList= new ArrayList<>();
+
+	// @OneToMany(cascade=CascadeType.ALL, mappedBy = "loan")
+	// @Column(name="employee_card_details")
+	//// @JsonBackReference
+	// @JsonIgnore
+	// private List<EmployeeCard> employeeCardList= new ArrayList<>();
 
 	public long getLoanId() {
 		return loanId;
@@ -71,20 +71,20 @@ public class Loan {
 		this.durationInYears = durationInYears;
 	}
 
-//	public List<EmployeeIssue> getEmployeeIssueList() {
-//		return employeeIssueList;
-//	}
-//
-//	public void setEmployeeIssueList(List<EmployeeIssue> employeeIssueList) {
-//		this.employeeIssueList = employeeIssueList;
-//	}
-//
-//	public List<EmployeeCard> getEmployeeCardList() {
-//		return employeeCardList;
-//	}
-//
-//	public void setEmployeeCardList(List<EmployeeCard> employeeCardList) {
-//		this.employeeCardList = employeeCardList;
-//	}
+	// public List<EmployeeIssue> getEmployeeIssueList() {
+	// return employeeIssueList;
+	// }
+	//
+	// public void setEmployeeIssueList(List<EmployeeIssue> employeeIssueList) {
+	// this.employeeIssueList = employeeIssueList;
+	// }
+	//
+	// public List<EmployeeCard> getEmployeeCardList() {
+	// return employeeCardList;
+	// }
+	//
+	// public void setEmployeeCardList(List<EmployeeCard> employeeCardList) {
+	// this.employeeCardList = employeeCardList;
+	// }
 
 }

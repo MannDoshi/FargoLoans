@@ -8,5 +8,4 @@ import lombok.Setter;
 public class EmployeeIssueListOfEmployeeRequest {
 	private long employeeId;
 	private String employeeIssueStatus;
-	
 }

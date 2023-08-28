@@ -28,50 +28,54 @@ import com.wellsfargo.training.fargoloans.service.LoanService;
 
 @CrossOrigin(origins = "http://localhost:3000")
 @RestController
-@RequestMapping(value="/api/loan")
+@RequestMapping(value = "/api/loan")
 public class LoanController {
 
 	@Autowired
 	private LoanService Lservice;
-	
-	@Autowired 
+
+	@Autowired
 	private LoanRepository Lrepo;
-	
+
 	@PostMapping("/")
 	public Loan saveLoan(@Validated @RequestBody Loan l) {
 		Loan l2 = Lservice.saveLoans(l);
 		return l2;
 	}
-	
+
 	@GetMapping("/all")
-	  public ResponseEntity<List<Loan>> allEmployee() {
-		  return new ResponseEntity<List<Loan>>(Lrepo.findAllBy(), HttpStatus.OK);
+	public ResponseEntity<List<Loan>> allEmployee() {
+		return new ResponseEntity<List<Loan>>(Lrepo.findAllBy(), HttpStatus.OK);
 	}
-	
+
 	@GetMapping("/{id}")
-	 public Optional<Loan> getEmployee(@PathVariable Long id) {
-		Optional<Loan> res=Lrepo.findById(id);
-		 return res;
+	public Optional<Loan> getEmployee(@PathVariable Long id) {
+		Optional<Loan> res = Lrepo.findById(id);
+		return res;
 	}
+
 	@PutMapping("/{id}")
-	public ResponseEntity<Loan> updateLoan(@PathVariable(value="id") Long pId, @Validated @RequestBody Loan l) throws ResourceNotFoundException{
-		Loan loan=Lservice.getSingleLoan(pId).orElseThrow(() -> new ResourceNotFoundException("Loan not found for this Id :"+pId));
-           loan.setLoanType(l.getLoanType());
-           loan.setDurationInYears(l.getDurationInYears());
-           
-          final Loan updatedLoan = Lservice.saveLoans(loan);
-          return ResponseEntity.ok().body(updatedLoan);
-		
+	public ResponseEntity<Loan> updateLoan(@PathVariable(value = "id") Long pId, @Validated @RequestBody Loan l)
+			throws ResourceNotFoundException {
+		Loan loan = Lservice.getSingleLoan(pId)
+				.orElseThrow(() -> new ResourceNotFoundException("Loan not found for this Id :" + pId));
+		loan.setLoanType(l.getLoanType());
+		loan.setDurationInYears(l.getDurationInYears());
+
+		final Loan updatedLoan = Lservice.saveLoans(loan);
+		return ResponseEntity.ok().body(updatedLoan);
+
 	}
-	
+
 	@DeleteMapping("/{id}")
-	public Map<String, Boolean> deleteLoan(@PathVariable(value="id") Long pId) throws ResourceNotFoundException{
-		Loan l=Lservice.getSingleLoan(pId).orElseThrow(() -> new ResourceNotFoundException("Loan not found for this Id :"+pId));
+	public Map<String, Boolean> deleteLoan(@PathVariable(value = "id") Long pId) throws ResourceNotFoundException {
+		Loan l = Lservice.getSingleLoan(pId)
+				.orElseThrow(() -> new ResourceNotFoundException("Loan not found for this Id :" + pId));
 		Lservice.deleteLoan(pId);
 		Map<String, Boolean> response = new HashMap<>();
 		response.put("Deleted", Boolean.TRUE);
 		return response;
-	
+
 	}
-	
-	}
+
+}

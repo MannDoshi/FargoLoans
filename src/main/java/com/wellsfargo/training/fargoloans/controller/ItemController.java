@@ -1,6 +1,5 @@
 package com.wellsfargo.training.fargoloans.controller;
 
-
 import java.sql.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -27,55 +26,52 @@ import com.wellsfargo.training.fargoloans.service.ItemService;
 
 @CrossOrigin(origins = "http://localhost:3000")
 @RestController
-@RequestMapping(value="/api/item")
+@RequestMapping(value = "/api/item")
 public class ItemController {
 
 	@Autowired
 	private ItemService Iservice;
-	
-	@Autowired 
+
+	@Autowired
 	private ItemRepository Irepo;
-	
+
 	@PostMapping("/")
 	private Item saveItem(@Validated @RequestBody Item i) {
 		Item i2 = Iservice.saveItem(i);
 		return i2;
 	}
-	
+
 	@GetMapping("/all")
-	  public ResponseEntity<List<Item>> allEmployee() {
-		  return new ResponseEntity<List<Item>>(Irepo.findAllBy(), HttpStatus.OK);
+	public ResponseEntity<List<Item>> allEmployee() {
+		return new ResponseEntity<List<Item>>(Irepo.findAllBy(), HttpStatus.OK);
 	}
-	
+
 	@GetMapping("/{id}")
-	 public Optional<Item> getEmployee(@PathVariable Long id) {
-		Optional<Item> res=Irepo.findById(id);
-		 return res;
+	public Optional<Item> getEmployee(@PathVariable Long id) {
+		Optional<Item> res = Irepo.findById(id);
+		return res;
 	}
+
 	@PutMapping("/{id}")
-	public ResponseEntity<Item> updateLoan(@PathVariable(value="id") Long pId, @Validated @RequestBody Item l) throws ResourceNotFoundException{
-		Item loan=Iservice.getSingleItem(pId).orElseThrow(() -> new ResourceNotFoundException("Loan not found for this Id :"+pId));
-          loan.setItemDesc(l.getItemDesc());
-          loan.setItemCategory(l.getItemCategory());
-//          loan.setIssueStatus(l.getIssueStatus());
-//          loan.setItemMake(l.getItemMake());
-//          loan.setItemValuation(l.getItemValuation());
-          
-		
-//		loan.setLoanType(l.getLoanType());
-//           loan.setDurationInYears(l.getDurationInYears());
-           
-          final Item updatedLoan = Iservice.saveItem(loan);
-          return ResponseEntity.ok().body(updatedLoan);
+	public ResponseEntity<Item> updateLoan(@PathVariable(value = "id") Long pId, @Validated @RequestBody Item l)
+			throws ResourceNotFoundException {
+		Item loan = Iservice.getSingleItem(pId)
+				.orElseThrow(() -> new ResourceNotFoundException("Loan not found for this Id :" + pId));
+		loan.setItemDesc(l.getItemDesc());
+		loan.setItemCategory(l.getItemCategory());
+
+		final Item updatedLoan = Iservice.saveItem(loan);
+		return ResponseEntity.ok().body(updatedLoan);
 	}
+
 	@DeleteMapping("/{id}")
-	public Map<String, Boolean> deleteLoan(@PathVariable(value="id") Long pId) throws ResourceNotFoundException{
-		Item l=Iservice.getSingleItem(pId).orElseThrow(() -> new ResourceNotFoundException("Loan not found for this Id :"+pId));
+	public Map<String, Boolean> deleteLoan(@PathVariable(value = "id") Long pId) throws ResourceNotFoundException {
+		Item l = Iservice.getSingleItem(pId)
+				.orElseThrow(() -> new ResourceNotFoundException("Loan not found for this Id :" + pId));
 		Iservice.deleteItem(pId);
 		Map<String, Boolean> response = new HashMap<>();
 		response.put("Deleted", Boolean.TRUE);
 		return response;
-	
+
 	}
 }
-

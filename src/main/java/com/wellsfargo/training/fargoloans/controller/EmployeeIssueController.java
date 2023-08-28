@@ -54,8 +54,6 @@ public class EmployeeIssueController {
 	@Autowired
 	private EmployeeService eservice;
 	
-	
-	
 	@PostMapping("/{empId}/{itemId}/{loanId}")
 	public void addEmployeeIssue(@PathVariable Long empId, @PathVariable Long itemId, @PathVariable Long loanId, @Validated @RequestBody EmployeeIssue ei) throws ResourceNotFoundException {
 
@@ -64,9 +62,7 @@ public class EmployeeIssueController {
 //			ei.setEmployee(e);
 ////			Irepo.findById(itemId).map(i -> {
 ////				ei.setItem(i);
-////	
 ////			});
-//			
 //			return eiservice.saveEmployeeIssue(ei);
 //		}).orElseThrow(() -> new ResourceNotFoundException("Employee not found for this Id :"+empId));//ma
 		
@@ -83,17 +79,12 @@ public class EmployeeIssueController {
 			Item i = oi.get();
 			ei.setItem(i);
 		}
-		
 		Optional<Loan> ol = Lrepo.findById(loanId);
 		if(ol.isPresent()) {
 			Loan l = ol.get();
 			ei.setLoan(l);
 		}
-		
-			
 		eiservice.saveEmployeeIssue(ei);
-//		}).orElseThrow(() -> new ResourceNotFoundException("Employee not found for this Id :"+empId));//ma
-		
 	}
 	
 	@GetMapping("/all")
@@ -125,19 +116,6 @@ public class EmployeeIssueController {
 		final EmployeeIssue updatedEI = eiservice.saveEmployeeIssue(employeeIssue);
 		return ResponseEntity.ok().body(updatedEI);
 	}
-//	@GetMapping("/{employeeId}/{employeeIssueStatus}")
-//	 public List<EmployeeIssue> getEmployeeIssue(@PathVariable Long employeeId,@PathVariable String employeeIssueStatus)throws ResourceNotFoundException {		
-//		List<EmployeeIssue> res = eiservice.getEmployeeIssueByEmployeeIdByIssueStatus(employeeId, EmployeeIssueStatus.valueOf(employeeIssueStatus) );
-//		
-//		return res;
-//	}
-//	@GetMapping("/employeeIssueStatus/{employeeIssueStatus}")
-//	 public List<EmployeeIssue> getEmployeeIssueByIssueStatus(@PathVariable String employeeIssueStatus)throws ResourceNotFoundException {		
-//		List<EmployeeIssue> res = eiservice.getEmployeeIssueByIssueStatus(EmployeeIssueStatus.valueOf(employeeIssueStatus) );
-//		
-//		return res;
-//	}
-//	
 
 
 	@GetMapping("emp/{empId}")

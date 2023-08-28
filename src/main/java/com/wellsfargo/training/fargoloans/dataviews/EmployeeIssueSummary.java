@@ -7,6 +7,8 @@ import com.wellsfargo.training.fargoloans.model.User;
 
 public interface EmployeeIssueSummary {
 	long getIssueId();
+
 	long getItemValue();
+
 	Loan getLoan();
 }

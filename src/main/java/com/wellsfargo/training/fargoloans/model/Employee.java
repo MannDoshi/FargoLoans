@@ -25,23 +25,23 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Entity
-@Table(name="employee_master")
-@NoArgsConstructor 
+@Table(name = "employee_master")
+@NoArgsConstructor
 @Getter
 @Setter
 public class Employee {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name="employee_id")
+	@Column(name = "employee_id")
 	private long empId;
-	
-	@Column(name="employee_name")
+
+	@Column(name = "employee_name")
 	private String empName;
-	
-	@Column(name="password")
+
+	@Column(name = "password")
 	private String password;
-	
+
 	public Employee(long empId, String empName, String password, String designation, String department, Boolean isAdmin,
 			Date dob, Date doj, List<EmployeeIssue> issueIdsList, List<EmployeeCard> empCardsList) {
 		this.empId = empId;
@@ -52,44 +52,41 @@ public class Employee {
 		this.isAdmin = isAdmin;
 		this.dob = dob;
 		this.doj = doj;
-//		this.issueIdsList = issueIdsList;
-//		this.empCardsList = empCardsList;
+		// this.issueIdsList = issueIdsList;
+		// this.empCardsList = empCardsList;
 	}
 
-	@Column(name="designation")
+	@Column(name = "designation")
 	private String designation;
-	
-	@Column(name="department")
+
+	@Column(name = "department")
 	private String department;
-	
-	@Column(name="is_admin")
+
+	@Column(name = "is_admin")
 	private Boolean isAdmin;
-	
 
-
-	@JsonFormat (pattern="yyyy-MM-dd")
-	@Column(name="date_of_birth")
+	@JsonFormat(pattern = "yyyy-MM-dd")
+	@Column(name = "date_of_birth")
 	private Date dob;
-	
-	
-	@JsonFormat (pattern="yyyy-MM-dd")
-	@Column(name="date_of_joining")
-	private Date doj;
-	
-//	@OneToMany(mappedBy = "employee", cascade=CascadeType.ALL)
-////	@JsonBackReference
-//	@JsonIgnore
-//	private List<EmployeeIssue> issueIdsList= new ArrayList<>();
 
-//	@OneToMany(mappedBy = "employee", cascade=CascadeType.ALL)
-//	@Column(name="card_ids")
-////	@JsonBackReference
-//	@JsonIgnore
-//	private List<EmployeeCard> empCardsList= new ArrayList<>();
-	
+	@JsonFormat(pattern = "yyyy-MM-dd")
+	@Column(name = "date_of_joining")
+	private Date doj;
+
+	// @OneToMany(mappedBy = "employee", cascade=CascadeType.ALL)
+	//// @JsonBackReference
+	// @JsonIgnore
+	// private List<EmployeeIssue> issueIdsList= new ArrayList<>();
+
+	// @OneToMany(mappedBy = "employee", cascade=CascadeType.ALL)
+	// @Column(name="card_ids")
+	//// @JsonBackReference
+	// @JsonIgnore
+	// private List<EmployeeCard> empCardsList= new ArrayList<>();
+
 	@OneToOne
-	@JoinColumn(name="user_id")
-//	@JsonBackReference
+	@JoinColumn(name = "user_id")
+	// @JsonBackReference
 	@JsonIgnore
 	private User user;
 
@@ -157,22 +154,6 @@ public class Employee {
 		this.doj = doj;
 	}
 
-//	public List<EmployeeIssue> getIssueIdsList() {
-//		return issueIdsList;
-//	}
-//
-//	public void setIssueIdsList(List<EmployeeIssue> issueIdsList) {
-//		this.issueIdsList = issueIdsList;
-//	}
-//
-//	public List<EmployeeCard> getEmpCardsList() {
-//		return empCardsList;
-//	}
-//
-//	public void setEmpCardsList(List<EmployeeCard> empCardsList) {
-//		this.empCardsList = empCardsList;
-//	}
-
 	public User getUser() {
 		return user;
 	}
@@ -180,7 +161,5 @@ public class Employee {
 	public void setUser(User user) {
 		this.user = user;
 	}
-	
-	
-	
+
 }

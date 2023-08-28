@@ -24,53 +24,50 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Entity
-@Table(name="employee_issue_details")
-@NoArgsConstructor 
+@Table(name = "employee_issue_details")
+@NoArgsConstructor
 @Getter
 @Setter
 public class EmployeeIssue {
 	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	@Column(name="issue_id")
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "issue_id")
 	private long issueId;
-	
-	@ManyToOne(cascade=CascadeType.ALL)
-	@JoinColumn(name="employee_id")
-//	@JsonIgnore
-//	@JsonManagedReference
-	private Employee employee;
-	
-	@ManyToOne(cascade=CascadeType.ALL)
-	@JoinColumn(name="item_id")
-//	@JsonIgnore
-//	@JsonManagedReference
-	private Item item;
-	
-	@ManyToOne(cascade=CascadeType.ALL)
-	@JoinColumn(name="loan_id")
-//	@JsonIgnore
-//	@JsonManagedReference
-	private Loan loan;
-	
-	
 
-	@Column(name="issue_date")
-	@JsonFormat (pattern="yyyy-MM-dd")
+	@ManyToOne(cascade = CascadeType.ALL)
+	@JoinColumn(name = "employee_id")
+	// @JsonIgnore
+	// @JsonManagedReference
+	private Employee employee;
+
+	@ManyToOne(cascade = CascadeType.ALL)
+	@JoinColumn(name = "item_id")
+	// @JsonIgnore
+	// @JsonManagedReference
+	private Item item;
+
+	@ManyToOne(cascade = CascadeType.ALL)
+	@JoinColumn(name = "loan_id")
+	// @JsonIgnore
+	// @JsonManagedReference
+	private Loan loan;
+
+	@Column(name = "issue_date")
+	@JsonFormat(pattern = "yyyy-MM-dd")
 	private Date issueDate;
-	
-	@JsonFormat (pattern="yyyy-MM-dd")
-	@Column(name="return_date")
+
+	@JsonFormat(pattern = "yyyy-MM-dd")
+	@Column(name = "return_date")
 	private Date return_date;
-	
+
 	@Enumerated(EnumType.STRING)
-	@Column(name="issue_status",columnDefinition="varchar(32) default 'WAITING' ")
-//	YES, NO, default?
-	private EmployeeIssueStatus issueStatus=EmployeeIssueStatus.WAITING;
-	
-	@Column(name="item_value")
+	@Column(name = "issue_status", columnDefinition = "varchar(32) default 'WAITING' ")
+	private EmployeeIssueStatus issueStatus = EmployeeIssueStatus.WAITING;
+
+	@Column(name = "item_value")
 	private String itemValue;
-	
-	@Column(name="item_make")
+
+	@Column(name = "item_make")
 	private String itemMake;
 
 	public long getIssueId() {
@@ -128,6 +125,7 @@ public class EmployeeIssue {
 	public void setIssueStatus(EmployeeIssueStatus issueStatus) {
 		this.issueStatus = issueStatus;
 	}
+
 	public void setIssueStatus(String issueStatus) {
 		this.issueStatus = EmployeeIssueStatus.valueOf(issueStatus);
 	}

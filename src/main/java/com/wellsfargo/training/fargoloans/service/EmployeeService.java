@@ -16,39 +16,38 @@ import jakarta.transaction.Transactional;
 @Service
 @Transactional
 public class EmployeeService {
-	
-   @Autowired
-   private EmployeeRepository Erepo;
-   
-   @Autowired
-   private UserRepository Urepo;
-   
-   public Employee saveEmployee(Employee e) {
-		return Erepo.save(e); //invokes predefined save() method of JPA Repository
+
+	@Autowired
+	private EmployeeRepository Erepo;
+
+	@Autowired
+	private UserRepository Urepo;
+
+	public Employee saveEmployee(Employee e) {
+		return Erepo.save(e); // invokes predefined save() method of JPA Repository
 	}
-   
-   public Optional<Employee> getSingleProduct(long id){
+
+	public Optional<Employee> getSingleProduct(long id) {
 		return Erepo.findById(id);
 	}
-	
-	public void deleteProduct(long id)
-	{
+
+	public void deleteProduct(long id) {
 		Erepo.deleteById(id);
 	}
 
 	public Optional<Employee> getEmployee(Long id) {
-		
 		return Erepo.findById(id);
-	}	
+	}
+
 	public List<Employee> getEmployees() {
-		
 		return Erepo.findAll();
 	}
+
 	public Employee createEmployee(Employee employee, User user) {
 		Urepo.save(user);
-	    employee.setUser(user);
-	    Employee savedEmployee=Erepo.save(employee);
-	    return savedEmployee;
+		employee.setUser(user);
+		Employee savedEmployee = Erepo.save(employee);
+		return savedEmployee;
 	}
-	
+
 }
