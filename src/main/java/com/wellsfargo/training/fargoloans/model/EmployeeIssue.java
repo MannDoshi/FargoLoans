@@ -37,19 +37,19 @@ public class EmployeeIssue {
 	@ManyToOne(cascade=CascadeType.ALL)
 	@JoinColumn(name="employee_id")
 //	@JsonIgnore
-	@JsonManagedReference
+//	@JsonManagedReference
 	private Employee employee;
 	
 	@ManyToOne(cascade=CascadeType.ALL)
 	@JoinColumn(name="item_id")
-	@JsonIgnore
-	@JsonManagedReference
+//	@JsonIgnore
+//	@JsonManagedReference
 	private Item item;
 	
 	@ManyToOne(cascade=CascadeType.ALL)
 	@JoinColumn(name="loan_id")
-	@JsonIgnore
-	@JsonManagedReference
+//	@JsonIgnore
+//	@JsonManagedReference
 	private Loan loan;
 	
 	

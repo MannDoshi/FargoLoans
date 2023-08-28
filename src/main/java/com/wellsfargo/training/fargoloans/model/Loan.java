@@ -36,16 +36,16 @@ public class Loan {
 	@Column(name="duration_in_years")
 	private int durationInYears;
 
-	@OneToMany(cascade=CascadeType.ALL, mappedBy = "loan")
-	@Column(name="employee_issue_details")
-	@JsonBackReference
-	private List<EmployeeIssue> employeeIssueList= new ArrayList<>();
-	
-	@OneToMany(cascade=CascadeType.ALL, mappedBy = "loan")
-	@Column(name="employee_card_details")
+//	@OneToMany(cascade=CascadeType.ALL, mappedBy = "loan")
+//	@Column(name="employee_issue_details")
 //	@JsonBackReference
-	@JsonIgnore
-	private List<EmployeeCard> employeeCardList= new ArrayList<>();
+//	private List<EmployeeIssue> employeeIssueList= new ArrayList<>();
+	
+//	@OneToMany(cascade=CascadeType.ALL, mappedBy = "loan")
+//	@Column(name="employee_card_details")
+////	@JsonBackReference
+//	@JsonIgnore
+//	private List<EmployeeCard> employeeCardList= new ArrayList<>();
 
 	public long getLoanId() {
 		return loanId;
@@ -71,20 +71,20 @@ public class Loan {
 		this.durationInYears = durationInYears;
 	}
 
-	public List<EmployeeIssue> getEmployeeIssueList() {
-		return employeeIssueList;
-	}
-
-	public void setEmployeeIssueList(List<EmployeeIssue> employeeIssueList) {
-		this.employeeIssueList = employeeIssueList;
-	}
-
-	public List<EmployeeCard> getEmployeeCardList() {
-		return employeeCardList;
-	}
-
-	public void setEmployeeCardList(List<EmployeeCard> employeeCardList) {
-		this.employeeCardList = employeeCardList;
-	}
+//	public List<EmployeeIssue> getEmployeeIssueList() {
+//		return employeeIssueList;
+//	}
+//
+//	public void setEmployeeIssueList(List<EmployeeIssue> employeeIssueList) {
+//		this.employeeIssueList = employeeIssueList;
+//	}
+//
+//	public List<EmployeeCard> getEmployeeCardList() {
+//		return employeeCardList;
+//	}
+//
+//	public void setEmployeeCardList(List<EmployeeCard> employeeCardList) {
+//		this.employeeCardList = employeeCardList;
+//	}
 
 }

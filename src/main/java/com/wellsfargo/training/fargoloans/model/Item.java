@@ -33,19 +33,19 @@ public class Item {
 	private String itemDesc;
 
 	
-	@Column(name="item_make")
-	private String itemMake;
+//	@Column(name="item_make")
+//	private String itemMake;
 	
 	@Column(name="item_category")
 	private String itemCategory;
 	
-	@Column(name="item_valuation")
-	private long itemValuation;
+//	@Column(name="item_valuation")
+//	private long itemValuation;
 
-	@OneToMany(cascade=CascadeType.ALL, mappedBy = "item")
-	@Column(name="issue_ids")
-	@JsonBackReference
-	private List<EmployeeIssue> issueIdList= new ArrayList<>();
+//	@OneToMany(cascade=CascadeType.ALL, mappedBy = "item")
+//	@Column(name="issue_ids")
+//	@JsonBackReference
+//	private List<EmployeeIssue> issueIdList= new ArrayList<>();
 
 	public long getItemId() {
 		return itemId;
@@ -63,13 +63,13 @@ public class Item {
 		this.itemDesc = itemDesc;
 	}
 
-	public String getItemMake() {
-		return itemMake;
-	}
-
-	public void setItemMake(String itemMake) {
-		this.itemMake = itemMake;
-	}
+//	public String getItemMake() {
+//		return itemMake;
+//	}
+//
+//	public void setItemMake(String itemMake) {
+//		this.itemMake = itemMake;
+//	}
 
 	public String getItemCategory() {
 		return itemCategory;
@@ -79,21 +79,21 @@ public class Item {
 		this.itemCategory = itemCategory;
 	}
 
-	public long getItemValuation() {
-		return itemValuation;
-	}
+//	public long getItemValuation() {
+//		return itemValuation;
+//	}
+//
+//	public void setItemValuation(long itemValuation) {
+//		this.itemValuation = itemValuation;
+//	}
 
-	public void setItemValuation(long itemValuation) {
-		this.itemValuation = itemValuation;
-	}
-
-	public List<EmployeeIssue> getIssueIdList() {
-		return issueIdList;
-	}
-
-	public void setIssueIdList(List<EmployeeIssue> issueIdList) {
-		this.issueIdList = issueIdList;
-	}
+//	public List<EmployeeIssue> getIssueIdList() {
+//		return issueIdList;
+//	}
+//
+//	public void setIssueIdList(List<EmployeeIssue> issueIdList) {
+//		this.issueIdList = issueIdList;
+//	}
 
 	
 	

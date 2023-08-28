@@ -52,8 +52,8 @@ public class Employee {
 		this.isAdmin = isAdmin;
 		this.dob = dob;
 		this.doj = doj;
-		this.issueIdsList = issueIdsList;
-		this.empCardsList = empCardsList;
+//		this.issueIdsList = issueIdsList;
+//		this.empCardsList = empCardsList;
 	}
 
 	@Column(name="designation")
@@ -76,15 +76,16 @@ public class Employee {
 	@Column(name="date_of_joining")
 	private Date doj;
 	
-	@OneToMany(mappedBy = "employee", cascade=CascadeType.ALL)
-	@JsonBackReference
-	private List<EmployeeIssue> issueIdsList= new ArrayList<>();
+//	@OneToMany(mappedBy = "employee", cascade=CascadeType.ALL)
+////	@JsonBackReference
+//	@JsonIgnore
+//	private List<EmployeeIssue> issueIdsList= new ArrayList<>();
 
-	@OneToMany(mappedBy = "employee", cascade=CascadeType.ALL)
-	@Column(name="card_ids")
-//	@JsonBackReference
-	@JsonIgnore
-	private List<EmployeeCard> empCardsList= new ArrayList<>();
+//	@OneToMany(mappedBy = "employee", cascade=CascadeType.ALL)
+//	@Column(name="card_ids")
+////	@JsonBackReference
+//	@JsonIgnore
+//	private List<EmployeeCard> empCardsList= new ArrayList<>();
 	
 	@OneToOne
 	@JoinColumn(name="user_id")
@@ -156,21 +157,21 @@ public class Employee {
 		this.doj = doj;
 	}
 
-	public List<EmployeeIssue> getIssueIdsList() {
-		return issueIdsList;
-	}
-
-	public void setIssueIdsList(List<EmployeeIssue> issueIdsList) {
-		this.issueIdsList = issueIdsList;
-	}
-
-	public List<EmployeeCard> getEmpCardsList() {
-		return empCardsList;
-	}
-
-	public void setEmpCardsList(List<EmployeeCard> empCardsList) {
-		this.empCardsList = empCardsList;
-	}
+//	public List<EmployeeIssue> getIssueIdsList() {
+//		return issueIdsList;
+//	}
+//
+//	public void setIssueIdsList(List<EmployeeIssue> issueIdsList) {
+//		this.issueIdsList = issueIdsList;
+//	}
+//
+//	public List<EmployeeCard> getEmpCardsList() {
+//		return empCardsList;
+//	}
+//
+//	public void setEmpCardsList(List<EmployeeCard> empCardsList) {
+//		this.empCardsList = empCardsList;
+//	}
 
 	public User getUser() {
 		return user;

@@ -58,8 +58,8 @@ public class ItemController {
           loan.setItemDesc(l.getItemDesc());
           loan.setItemCategory(l.getItemCategory());
 //          loan.setIssueStatus(l.getIssueStatus());
-          loan.setItemMake(l.getItemMake());
-          loan.setItemValuation(l.getItemValuation());
+//          loan.setItemMake(l.getItemMake());
+//          loan.setItemValuation(l.getItemValuation());
           
 		
 //		loan.setLoanType(l.getLoanType());
