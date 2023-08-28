@@ -1,6 +1,10 @@
 package com.wellsfargo.training.fargoloans.controller;
 
 import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.Mockito.doNothing;
+import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 
 import java.util.Optional;
 
@@ -45,5 +49,38 @@ class LoanControllerTest {
 		Loan l = testLoan.get();
 		assertEquals(loanType, l.getLoanType());
 	}
+	
+	@Test
+    public void testSaveLoan() {
+        Loan loanToSave = new Loan(2, "b", 2);
 
+        when(loanRepository.save(loanToSave)).thenReturn(loanToSave);
+
+        Loan savedLoan = loanService.saveLoans(loanToSave);
+
+        assertEquals("b", savedLoan.getLoanType());
+    }
+
+    @Test
+    public void testDeleteLoan() {
+        doNothing().when(loanRepository).deleteById(1L);
+
+        loanService.deleteLoan(1L);
+
+        verify(loanRepository, times(1)).deleteById(1L);
+    }
+
+//    @Test
+//    public void testUpdateLoan() {
+//        Loan existingLoan = new Loan(1, "a", 1);
+//        Loan updatedLoan = new Loan(1, "updated", 2);
+//
+//        when(loanRepository.findById(1L)).thenReturn(Optional.of(existingLoan));
+//        when(loanRepository.save(updatedLoan)).thenReturn(updatedLoan);
+//
+//        Loan result = loanService.updateLoan(1L, updatedLoan);
+//
+//        assertEquals("updated", result.getLoanType());
+//        assertEquals(2, result.getDuration());
+//    }
 }
