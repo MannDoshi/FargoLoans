@@ -32,97 +32,99 @@ import com.wellsfargo.training.fargoloans.repository.LoanRepository;
 import com.wellsfargo.training.fargoloans.service.EmployeeIssueService;
 import com.wellsfargo.training.fargoloans.service.EmployeeService;
 import com.wellsfargo.training.fargoloans.enums.EmployeeIssueStatus;
+
 @CrossOrigin(origins = "http://localhost:3000")
 @RestController
-@RequestMapping(value="/api/employeeissue")
+@RequestMapping(value = "/api/employeeissue")
 public class EmployeeIssueController {
 	@Autowired
 	private EmployeeIssueService eiservice;
-	
+
 	@Autowired
 	private EmployeeIssueRepository employeeIssueRepository;
-	
+
 	@Autowired
 	private ItemRepository Irepo;
-	
+
 	@Autowired
 	private LoanRepository Lrepo;
-	
-	@Autowired 
+
+	@Autowired
 	private EmployeeRepository Erepo;
-	
+
 	@Autowired
 	private EmployeeService eservice;
-	
-	@PostMapping("/{empId}/{itemId}/{loanId}")
-	public void addEmployeeIssue(@PathVariable Long empId, @PathVariable Long itemId, @PathVariable Long loanId, @Validated @RequestBody EmployeeIssue ei) throws ResourceNotFoundException {
 
-//		 Erepo.findById(empId).map(e ->{
-//			//System.out.println(ei);
-//			ei.setEmployee(e);
-////			Irepo.findById(itemId).map(i -> {
-////				ei.setItem(i);
-////			});
-//			return eiservice.saveEmployeeIssue(ei);
-//		}).orElseThrow(() -> new ResourceNotFoundException("Employee not found for this Id :"+empId));//ma
-		
+	@PostMapping("/{empId}/{itemId}/{loanId}")
+	public void addEmployeeIssue(@PathVariable Long empId, @PathVariable Long itemId, @PathVariable Long loanId,
+			@Validated @RequestBody EmployeeIssue ei) throws ResourceNotFoundException {
+
+		// Erepo.findById(empId).map(e ->{
+		// //System.out.println(ei);
+		// ei.setEmployee(e);
+		//// Irepo.findById(itemId).map(i -> {
+		//// ei.setItem(i);
+		//// });
+		// return eiservice.saveEmployeeIssue(ei);
+		// }).orElseThrow(() -> new ResourceNotFoundException("Employee not found for
+		// this Id :"+empId));//ma
+
 		Optional<Employee> oe = Erepo.findById(empId);
-		if(oe.isPresent()) {
+		if (oe.isPresent()) {
 			Employee e = oe.get();
 			ei.setEmployee(e);
 		}
-//		else {
-//			throw new ResourceNotFoundException("Employee not found for this Id :"+empId);
-//		}
+
 		Optional<Item> oi = Irepo.findById(itemId);
-		if(oi.isPresent()) {
+		if (oi.isPresent()) {
 			Item i = oi.get();
 			ei.setItem(i);
 		}
 		Optional<Loan> ol = Lrepo.findById(loanId);
-		if(ol.isPresent()) {
+		if (ol.isPresent()) {
 			Loan l = ol.get();
 			ei.setLoan(l);
 		}
 		eiservice.saveEmployeeIssue(ei);
 	}
-	
+
 	@GetMapping("/all")
-	  public ResponseEntity<List<EmployeeIssue>> allEmployeeIssue() {
-		  return new ResponseEntity<List<EmployeeIssue>>(employeeIssueRepository.findAll(), HttpStatus.OK);
+	public ResponseEntity<List<EmployeeIssue>> allEmployeeIssue() {
+		return new ResponseEntity<List<EmployeeIssue>>(employeeIssueRepository.findAll(), HttpStatus.OK);
 	}
-	
+
 	@GetMapping("/{id}")
-	 public Optional<EmployeeIssue> getEmployeeIssue(@PathVariable Long id) {		
+	public Optional<EmployeeIssue> getEmployeeIssue(@PathVariable Long id) {
 		Optional<EmployeeIssue> res = eiservice.getEmployeeIssue(id);
-		 return res;
+		return res;
 	}
-	
+
 	@DeleteMapping("/{id}")
-	public Map<String, Boolean> deleteProduct(@PathVariable(value="id") Long pId) throws ResourceNotFoundException{
-		EmployeeIssue e = eiservice.getSingleEmployeeIssue(pId).orElseThrow(() -> new ResourceNotFoundException("EmployeeIssue not found for this Id :"+pId));
+	public Map<String, Boolean> deleteProduct(@PathVariable(value = "id") Long pId) throws ResourceNotFoundException {
+		EmployeeIssue e = eiservice.getSingleEmployeeIssue(pId)
+				.orElseThrow(() -> new ResourceNotFoundException("EmployeeIssue not found for this Id :" + pId));
 		eiservice.deleteEmployeeIssue(pId);
 		Map<String, Boolean> response = new HashMap<>();
 		response.put("Deleted", Boolean.TRUE);
 		return response;
 	}
-	
+
 	@PutMapping("/{id}")
-	public ResponseEntity<EmployeeIssue> updateEmployeeIssue(@PathVariable(value="id") Long pId, @Validated @RequestBody EmployeeIssue ei) throws ResourceNotFoundException{
-		EmployeeIssue employeeIssue = eiservice.getSingleEmployeeIssue(pId).orElseThrow(() -> new ResourceNotFoundException("Employee not found for this Id :"+pId));
-		employeeIssue.setIssueDate(ei.getIssueDate());
-		employeeIssue.setReturn_date(ei.getReturn_date());
+	public ResponseEntity<EmployeeIssue> updateEmployeeIssue(@PathVariable(value = "id") Long pId,
+			@Validated @RequestBody EmployeeIssue ei) throws ResourceNotFoundException {
+		EmployeeIssue employeeIssue = eiservice.getSingleEmployeeIssue(pId)
+				.orElseThrow(() -> new ResourceNotFoundException("Employee not found for this Id :" + pId));
 		employeeIssue.setIssueStatus(ei.getIssueStatus());
 		final EmployeeIssue updatedEI = eiservice.saveEmployeeIssue(employeeIssue);
 		return ResponseEntity.ok().body(updatedEI);
 	}
 
-
 	@GetMapping("emp/{empId}")
-	public ResponseEntity<List<EmployeeIssue>> getAllEmployeeIssue(@PathVariable Long empId) throws ResourceNotFoundException{
+	public ResponseEntity<List<EmployeeIssue>> getAllEmployeeIssue(@PathVariable Long empId)
+			throws ResourceNotFoundException {
 		List<EmployeeIssue> res = eiservice.getEmployeeIssueByEmployeeId(empId);
 		return ResponseEntity.ok().body(res);
-		
+
 	}
-	
+
 }
