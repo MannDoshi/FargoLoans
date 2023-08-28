@@ -31,7 +31,7 @@ import com.wellsfargo.training.fargoloans.repository.ItemRepository;
 import com.wellsfargo.training.fargoloans.repository.LoanRepository;
 import com.wellsfargo.training.fargoloans.service.EmployeeIssueService;
 import com.wellsfargo.training.fargoloans.service.EmployeeService;
-
+import com.wellsfargo.training.fargoloans.enums.EmployeeIssueStatus;
 @CrossOrigin(origins = "http://localhost:3000")
 @RestController
 @RequestMapping(value="/api/employeeissue")
@@ -124,4 +124,18 @@ public class EmployeeIssueController {
 		final EmployeeIssue updatedEI = eiservice.saveEmployeeIssue(employeeIssue);
 		return ResponseEntity.ok().body(updatedEI);
 	}
+//	@GetMapping("/{employeeId}/{employeeIssueStatus}")
+//	 public List<EmployeeIssue> getEmployeeIssue(@PathVariable Long employeeId,@PathVariable String employeeIssueStatus)throws ResourceNotFoundException {		
+//		List<EmployeeIssue> res = eiservice.getEmployeeIssueByEmployeeIdByIssueStatus(employeeId, EmployeeIssueStatus.valueOf(employeeIssueStatus) );
+//		
+//		return res;
+//	}
+//	@GetMapping("/employeeIssueStatus/{employeeIssueStatus}")
+//	 public List<EmployeeIssue> getEmployeeIssueByIssueStatus(@PathVariable String employeeIssueStatus)throws ResourceNotFoundException {		
+//		List<EmployeeIssue> res = eiservice.getEmployeeIssueByIssueStatus(EmployeeIssueStatus.valueOf(employeeIssueStatus) );
+//		
+//		return res;
+//	}
+//	
+	
 }

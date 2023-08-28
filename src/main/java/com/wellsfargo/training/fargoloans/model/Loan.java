@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import jakarta.persistence.CascadeType;
@@ -43,6 +44,7 @@ public class Loan {
 	@OneToMany(cascade=CascadeType.ALL, mappedBy = "loan")
 	@Column(name="employee_card_details")
 //	@JsonBackReference
+	@JsonIgnore
 	private List<EmployeeCard> employeeCardList= new ArrayList<>();
 
 	public long getLoanId() {

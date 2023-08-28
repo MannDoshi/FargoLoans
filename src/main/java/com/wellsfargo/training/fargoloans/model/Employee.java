@@ -6,6 +6,7 @@ import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import jakarta.persistence.CascadeType;
@@ -76,17 +77,19 @@ public class Employee {
 	private Date doj;
 	
 	@OneToMany(mappedBy = "employee", cascade=CascadeType.ALL)
-//	@JsonBackReference
+	@JsonBackReference
 	private List<EmployeeIssue> issueIdsList= new ArrayList<>();
 
 	@OneToMany(mappedBy = "employee", cascade=CascadeType.ALL)
 	@Column(name="card_ids")
 //	@JsonBackReference
+	@JsonIgnore
 	private List<EmployeeCard> empCardsList= new ArrayList<>();
 	
 	@OneToOne
 	@JoinColumn(name="user_id")
 //	@JsonBackReference
+	@JsonIgnore
 	private User user;
 
 	public long getEmpId() {
@@ -176,5 +179,7 @@ public class Employee {
 	public void setUser(User user) {
 		this.user = user;
 	}
+	
+	
 	
 }
