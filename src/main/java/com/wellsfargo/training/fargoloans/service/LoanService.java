@@ -1,10 +1,12 @@
 package com.wellsfargo.training.fargoloans.service;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.wellsfargo.training.fargoloans.model.Item;
 import com.wellsfargo.training.fargoloans.model.Loan;
 import com.wellsfargo.training.fargoloans.repository.LoanRepository;
 
@@ -27,5 +29,9 @@ public class LoanService {
 
 	public void deleteLoan(long id) {
 		Lrepo.deleteById(id);
+	}
+	
+	public List<Loan> getAllLoans () {
+		return Lrepo.findAll();
 	}
 }
