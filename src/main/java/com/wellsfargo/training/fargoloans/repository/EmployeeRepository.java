@@ -7,5 +7,5 @@ import com.wellsfargo.training.fargoloans.dataviews.EmployeeDetails;
 import com.wellsfargo.training.fargoloans.model.Employee;
 
 public interface EmployeeRepository extends JpaRepository<Employee, Long> {
-	public List<EmployeeDetails> findAllBy();
+	public List<Employee> findAllBy();
 }

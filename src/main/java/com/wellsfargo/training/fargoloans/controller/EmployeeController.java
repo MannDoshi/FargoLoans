@@ -89,8 +89,8 @@ public class EmployeeController {
 	}
 
 	@GetMapping("/all")
-	public ResponseEntity<List<EmployeeDetails>> allEmployee() {
-		return new ResponseEntity<List<EmployeeDetails>>(employeeRepository.findAllBy(), HttpStatus.OK);
+	public ResponseEntity<List<Employee>> allEmployee() {
+		return new ResponseEntity<List<Employee>>(employeeRepository.findAllBy(), HttpStatus.OK);
 	}
 
 	@GetMapping("/{id}")

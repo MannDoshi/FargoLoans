@@ -51,6 +51,8 @@ public class EmployeeService {
 	public Employee createEmployee(Employee employee, User user) {
 		Urepo.save(user);
 		employee.setUser(user);
+//		if(user.getRoles()[0]==Roles.)
+			
 		Employee savedEmployee = Erepo.save(employee);
 		return savedEmployee;
 	}
