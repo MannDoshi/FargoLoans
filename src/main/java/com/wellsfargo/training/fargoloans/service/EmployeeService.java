@@ -32,6 +32,11 @@ public class EmployeeService {
 	}
 
 	public void deleteProduct(long id) {
+	
+		Urepo.findById(id).get().setRoles(null);
+		Long userId=Erepo.findById(id).get().getUser().getId();
+		Erepo.findById(id).get().setUser(null);
+		Urepo.deleteById(userId);
 		Erepo.deleteById(id);
 	}
 
